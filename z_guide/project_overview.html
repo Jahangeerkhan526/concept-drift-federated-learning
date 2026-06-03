@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Overview — Jahangeer Khan</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0b1d3a; --blue: #1a56db; --teal: #0d9488;
+    --green: #16a34a; --orange: #ea580c; --purple: #7c3aed;
+    --red: #dc2626; --gray: #64748b; --light: #f4f7fc;
+    --border: #dce4f0; --white: #ffffff;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: #eef2f9; color: var(--navy); padding: 40px 20px; }
+  .page { max-width: 960px; margin: 0 auto; }
+
+  .hero { background: var(--navy); border-radius: 20px; padding: 44px 48px; margin-bottom: 32px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(26,86,219,0.2) 0%, transparent 70%); }
+  .hero-badge { display: inline-block; background: rgba(26,86,219,0.25); color: #93c5fd; font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; font-family: 'DM Mono', monospace; }
+  .hero h1 { font-family: 'Syne', sans-serif; font-size: 28px; color: white; font-weight: 800; margin-bottom: 8px; line-height: 1.3; }
+  .hero p { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  .section { background: white; border-radius: 16px; border: 1px solid var(--border); padding: 28px 32px; margin-bottom: 20px; }
+  .sec-label { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .sec-num { background: var(--navy); color: white; font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .sec-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--navy); }
+  .body-text { font-size: 13px; line-height: 1.8; color: #334155; margin-bottom: 12px; }
+
+  /* FLOW DIAGRAM */
+  .flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin: 16px 0; }
+  .flow-box { background: var(--light); border: 1.5px solid var(--border); border-radius: 10px; padding: 12px 16px; text-align: center; flex: 1; min-width: 120px; }
+  .flow-box-icon { font-size: 20px; margin-bottom: 4px; }
+  .flow-box-title { font-size: 11px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .flow-box-sub { font-size: 10px; color: var(--gray); }
+  .flow-arrow { font-size: 20px; color: var(--blue); padding: 0 8px; flex-shrink: 0; }
+
+  /* CONCEPT CARDS */
+  .concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
+  .concept-card { border-radius: 12px; padding: 18px; border: 1.5px solid; }
+  .concept-card .c-icon { font-size: 24px; margin-bottom: 8px; }
+  .concept-card .c-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .concept-card .c-text { font-size: 12px; line-height: 1.6; }
+
+  /* COMPARISON TABLE */
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 12px; }
+  .comp-table th { background: var(--navy); color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+  .comp-table th:first-child { border-radius: 8px 0 0 0; }
+  .comp-table th:last-child { border-radius: 0 8px 0 0; }
+  .comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: #334155; vertical-align: top; }
+  .comp-table tr:nth-child(even) td { background: var(--light); }
+
+  /* COSINE DEMO */
+  .cosine-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+  .cosine-box { background: var(--light); border-radius: 10px; padding: 16px; }
+  .cosine-box-title { font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace; margin-bottom: 10px; }
+  .cosine-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .cosine-day { font-size: 10px; color: var(--gray); width: 50px; flex-shrink: 0; font-family: 'DM Mono', monospace; }
+  .cosine-bar-bg { flex: 1; height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden; }
+  .cosine-bar-fill { height: 100%; border-radius: 5px; }
+  .cosine-val { font-size: 10px; font-weight: 700; width: 30px; text-align: right; font-family: 'DM Mono', monospace; }
+
+  .quote { border-left: 4px solid var(--blue); background: #f0f5ff; padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 12px 0; font-size: 13px; font-style: italic; color: var(--navy); line-height: 1.7; }
+
+  .footer { text-align: center; margin-top: 32px; font-size: 12px; color: var(--gray); font-family: 'DM Mono', monospace; }
+
+  @media (max-width: 600px) { .concept-grid, .cosine-demo { grid-template-columns: 1fr; } .flow { flex-direction: column; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-badge">🔬 Project Overview</div>
+    <h1>Detecting Concept Drift in<br>Non-IID Federated Learning Environments</h1>
+    <p>Jahangeer Khan · MSc Artificial Intelligence · SHU · Supervisor: Prof. Jing Wang</p>
+  </div>
+
+  <!-- 1. WHAT IS FL -->
+  <div class="section">
+    <div class="sec-label"><div class="sec-num">01</div><div class="sec-title">What is Federated Learning?</div></div>
+    <p class="body-text">Federated Learning (FL) allows multiple organisations to train a shared AI model together — without sharing their raw data. Each organisation trains locally on their own data and only sends model weights (patterns) to a central server.</p>
+    <div class="flow">
+      <div class="flow-box"><div class="flow-box-icon">🏦</div><div class="flow-box-title">Bank A</div><div class="flow-box-sub">Local training</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box"><div class="flow-box-icon">🖥️</div><div class="flow-box-title">Central Server</div><div class="flow-box-sub">Aggregates weights</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box"><div class="flow-box-icon">🏥</div><div class="flow-box-title">Hospital B</div><div class="flow-box-sub">Local training</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box"><div class="flow-box-icon">🧠</div><div class="flow-box-title">Global Model</div><div class="flow-box-sub">Better AI!</div></div>
+    </div>
+  </div>
+
+  <!-- 2. TWO PROBLEMS -->
+  <div class="section">
+    <div class="sec-label"><div class="sec-num">02</div><div class="sec-title">The Two Problems</div></div>
+    <div class="concept-grid">
+      <div class="concept-card" style="background:#fef2f2;border-color:#fecaca;">
+        <div class="c-icon">🗂️</div>
+        <div class="c-title" style="color:#991b1b;">Non-IID Data</div>
+        <div class="c-text" style="color:#dc2626;">Each organisation always has different data. Bank A has rich customers, Bank B has students. This is permanent and expected — it never changes.</div>
+      </div>
+      <div class="concept-card" style="background:#fff7ed;border-color:#fed7aa;">
+        <div class="c-icon">🌊</div>
+        <div class="c-title" style="color:#9a3412;">Concept Drift</div>
+        <div class="c-text" style="color:#ea580c;">An organisation's data suddenly changes over time. Fraud patterns evolve. New virus appears. This is unexpected and causes the model to fail.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. THE GAP -->
+  <div class="section">
+    <div class="sec-label"><div class="sec-num">03</div><div class="sec-title">The Research Gap</div></div>
+    <p class="body-text">When the server receives a bad update from a client, it cannot tell whether:</p>
+    <div class="concept-grid">
+      <div class="concept-card" style="background:#f0f5ff;border-color:#bfdbfe;">
+        <div class="c-icon">❓</div>
+        <div class="c-title" style="color:#1e40af;">Non-IID?</div>
+        <div class="c-text" style="color:#3b82f6;">This client was always different — it is just unique. Normal! Ignore it.</div>
+      </div>
+      <div class="concept-card" style="background:#fef2f2;border-color:#fecaca;">
+        <div class="c-icon">⚠️</div>
+        <div class="c-title" style="color:#991b1b;">Concept Drift?</div>
+        <div class="c-text" style="color:#dc2626;">This client's data just changed — something happened! Act now!</div>
+      </div>
+    </div>
+    <div class="quote">"Existing research addresses Non-IID and Concept Drift separately. No work uses a client's own gradient history to distinguish between the two."</div>
+  </div>
+
+  <!-- 4. RESEARCH QUESTION -->
+  <div class="section">
+    <div class="sec-label"><div class="sec-num">04</div><div class="sec-title">Research Question</div></div>
+    <div class="quote" style="font-size:15px;font-weight:600;">"Can cosine similarity detect concept drift in a Non-IID Federated Learning environment?"</div>
+  </div>
+
+  <!-- 5. SOLUTION -->
+  <div class="section">
+    <div class="sec-label"><div class="sec-num">05</div><div class="sec-title">Proposed Solution — Cosine Similarity</div></div>
+    <p class="body-text">Compare each client's current gradients to its own historical gradients. The pattern tells us what happened:</p>
+    <div class="cosine-demo">
+      <div class="cosine-box">
+        <div class="cosine-box-title" style="color:#16a34a;">✅ NON-IID CLIENT — Stable</div>
+        <div class="cosine-row"><span class="cosine-day">Day 1</span><div class="cosine-bar-bg"><div class="cosine-bar-fill" style="width:30%;background:#16a34a;"></div></div><span class="cosine-val" style="color:#16a34a;">0.3</span></div>
+        <div class="cosine-row"><span class="cosine-day">Day 10</span><div class="cosine-bar-bg"><div class="cosine-bar-fill" style="width:30%;background:#16a34a;"></div></div><span class="cosine-val" style="color:#16a34a;">0.3</span></div>
+        <div class="cosine-row"><span class="cosine-day">Day 20</span><div class="cosine-bar-bg"><div class="cosine-bar-fill" style="width:30%;background:#16a34a;"></div></div><span class="cosine-val" style="color:#16a34a;">0.3</span></div>
+        <div class="cosine-row"><span class="cosine-day">Day 30</span><div class="cosine-bar-bg"><div class="cosine-bar-fill" style="width:30%;background:#16a34a;"></div></div><span class="cosine-val" style="color:#16a34a;">0.3</span></div>
+        <p style="font-size:11px;color:#16a34a;margin-top:8px;font-weight:600;">→ Always low, always stable = Normal!</p>
+      </div>
+      <div class="cosine-box">
+        <div class="cosine-box-title" style="color:#dc2626;">⚠️ DRIFTING CLIENT — Sudden Drop</div>
+        <div class="cosine-row"><span class="cosine-day">Day 1</span><div class="cosine-bar-bg"><div class="cosine-bar-fill" style="width:80%;background:#16a34a;"></div></div><span class="cosine-val" style="color:#16a34a;">0.8</span></div>
+        <div class="cosine-row"><span class="cosine-day">Day 10</span><div class="cosine-bar-bg"><div class="cosine-bar-fill" style="width:80%;background:#16a34a;"></div></div><span class="cosine-val" style="color:#16a34a;">0.8</span></div>
+        <div class="cosine-row"><span class="cosine-day">Day 20</span><div class="cosine-bar-bg"><div class="cosine-bar-fill" style="width:80%;background:#16a34a;"></div></div><span class="cosine-val" style="color:#16a34a;">0.8</span></div>
+        <div class="cosine-row"><span class="cosine-day">Day 26</span><div class="cosine-bar-bg"><div class="cosine-bar-fill" style="width:10%;background:#dc2626;"></div></div><span class="cosine-val" style="color:#dc2626;">0.1</span></div>
+        <p style="font-size:11px;color:#dc2626;margin-top:8px;font-weight:600;">→ Sudden drop = DRIFT detected!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. COMPARISON -->
+  <div class="section">
+    <div class="sec-label"><div class="sec-num">06</div><div class="sec-title">3 Models Compared</div></div>
+    <table class="comp-table">
+      <thead><tr><th>Model</th><th>What it does</th><th>Normal</th><th>Non-IID</th><th>Drift</th><th>Both</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Simple ML</strong></td><td>No FL — basic model</td><td>78%</td><td>55%</td><td>41%</td><td>38%</td></tr>
+        <tr><td><strong>FedAvg</strong></td><td>Standard FL — blind to drift</td><td>85%</td><td>61%</td><td>52%</td><td>44%</td></tr>
+        <tr><td><strong>Our Method ✅</strong></td><td>Cosine similarity detects drift</td><td>87%</td><td>74%</td><td>76%</td><td>71%</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--gray);margin-top:8px;">* Numbers are estimated targets — actual results from experiments</p>
+  </div>
+
+  <!-- 7. TOOLS -->
+  <div class="section">
+    <div class="sec-label"><div class="sec-num">07</div><div class="sec-title">Tools & Technologies</div></div>
+    <div class="concept-grid">
+      <div class="concept-card" style="background:#f0f5ff;border-color:#bfdbfe;">
+        <div class="c-icon">🌸</div>
+        <div class="c-title" style="color:#1e40af;">Flower (flwr)</div>
+        <div class="c-text" style="color:#3b82f6;">FL framework — simulates clients and server</div>
+      </div>
+      <div class="concept-card" style="background:#f0fdf4;border-color:#bbf7d0;">
+        <div class="c-icon">🔥</div>
+        <div class="c-title" style="color:#15803d;">PyTorch</div>
+        <div class="c-text" style="color:#16a34a;">Deep learning — model training</div>
+      </div>
+      <div class="concept-card" style="background:#fff7ed;border-color:#fed7aa;">
+        <div class="c-icon">📊</div>
+        <div class="c-title" style="color:#9a3412;">CIFAR-10</div>
+        <div class="c-text" style="color:#ea580c;">Standard benchmark dataset — free, public</div>
+      </div>
+      <div class="concept-card" style="background:#faf5ff;border-color:#e9d5ff;">
+        <div class="c-icon">📐</div>
+        <div class="c-title" style="color:#6b21a8;">Cosine Similarity</div>
+        <div class="c-text" style="color:#9333ea;">Main detection tool — PyTorch built-in</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Jahangeer Khan · MSc Artificial Intelligence · SHU · Supervisor: Prof. Jing Wang · 2026</div>
+</div>
+</body>
+</html>
