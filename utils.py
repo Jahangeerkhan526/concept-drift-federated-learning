@@ -87,10 +87,12 @@ def inject_concept_drift(X, y, indices, drift_type="sudden"):
 
     if drift_type == "sudden":
         np.random.shuffle(y_drifted)
-    elif drift_type == "gradual":
-        n = len(y_drifted)
-        shuffle_count = n // 3
-        y_drifted[:shuffle_count] = np.random.permutation(y_drifted[:shuffle_count])
+    # gradual drift — to be implemented in next phase
+
+    # elif drift_type == "gradual":
+    #    n = len(y_drifted)
+    #    shuffle_count = n // 3
+     #   y_drifted[:shuffle_count] = np.random.permutation(y_drifted[:shuffle_count])
 
     return X_drifted, y_drifted
 

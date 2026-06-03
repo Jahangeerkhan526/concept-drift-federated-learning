@@ -379,11 +379,11 @@ def run_daaw(num_rounds=10, num_clients=10, alpha=0.5, short_window=5, long_wind
 
 
 if __name__ == "__main__":
-    run_fedavg(num_rounds=10, num_clients=10, alpha=0.5)
+    run_fedavg(num_rounds=50, num_clients=10, alpha=0.5)
     print("\nFedAvg Baseline complete!")
 
-    run_cda_fedavg(num_rounds=10, num_clients=10, alpha=0.5)
+    run_cda_fedavg(num_rounds=50, num_clients=10, alpha=0.5)
     print("\nCDA-FedAvg Baseline complete!")
 
-    run_daaw(num_rounds=10, num_clients=10, alpha=0.5)
+    run_daaw(num_rounds=50, num_clients=10, alpha=0.5)
     print("\nDAAW complete!")
