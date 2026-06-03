@@ -3,3 +3,5 @@ __pycache__/
 data/har_cache.pkl 
 .DS_Store 
 *.pyc 
+data/UCI HAR Dataset/ 
+z_guide/ 
