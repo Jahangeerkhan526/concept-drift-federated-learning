@@ -21,22 +21,16 @@ def load_har_dataset():
 
     print("Reading UCI HAR dataset from folder...")
 
-    # Load train
     X_train = np.loadtxt(os.path.join(HAR_PATH, "train", "X_train.txt"))
     y_train = np.loadtxt(os.path.join(HAR_PATH, "train", "y_train.txt"), dtype=int)
 
-    # Load test
     X_test = np.loadtxt(os.path.join(HAR_PATH, "test", "X_test.txt"))
     y_test = np.loadtxt(os.path.join(HAR_PATH, "test", "y_test.txt"), dtype=int)
 
-    # Combine train and test
     X = np.vstack([X_train, X_test]).astype(np.float32)
     y = np.concatenate([y_train, y_test]).astype(np.int64)
-
-    # Convert labels 1-6 to 0-5
     y = y - 1
 
-    # Save cache
     with open(CACHE_PATH, "wb") as f:
         pickle.dump((X, y), f)
     print(f"Cache saved to {CACHE_PATH}")
@@ -99,3 +93,59 @@ def inject_concept_drift(X, y, indices, drift_type="sudden"):
         y_drifted[:shuffle_count] = np.random.permutation(y_drifted[:shuffle_count])
 
     return X_drifted, y_drifted
+
+
+def cosine_similarity(v1, v2):
+    """
+    Compute cosine similarity between two vectors.
+    Returns value between -1 and 1.
+    1  = identical direction (no drift)
+    0  = orthogonal (major change)
+    -1 = opposite direction (complete drift)
+    """
+    norm1 = np.linalg.norm(v1)
+    norm2 = np.linalg.norm(v2)
+
+    if norm1 == 0 or norm2 == 0:
+        return 1.0  # treat zero vector as no change
+
+    return np.dot(v1, v2) / (norm1 * norm2)
+
+
+def daaw_detect_drift(gradient_history, short_window=5, long_window=50, threshold=0.3):
+    """
+    DAAW — Double sliding window cosine similarity drift detection.
+
+    Short window (5 rounds)  — detects sudden drift
+    Long window  (50 rounds) — detects gradual drift
+
+    Logic:
+    - Compute average gradient in short window
+    - Compute average gradient in long window
+    - If cosine similarity between them drops below threshold → drift detected
+
+    Returns: (drift_detected: bool, similarity_score: float)
+    """
+    if len(gradient_history) < short_window + 1:
+        return False, 1.0  # not enough history yet
+
+    # Short window — recent rounds
+    short = gradient_history[-short_window:]
+    short_avg = np.mean(short, axis=0)
+
+    # Long window — older rounds (or all available if less than long_window)
+    long_end = max(0, len(gradient_history) - short_window)
+    long_start = max(0, long_end - long_window)
+    long = gradient_history[long_start:long_end]
+
+    if len(long) == 0:
+        return False, 1.0
+
+    long_avg = np.mean(long, axis=0)
+
+    # Compute cosine similarity between short and long window averages
+    similarity = cosine_similarity(short_avg, long_avg)
+
+    drift_detected = similarity < threshold
+
+    return drift_detected, similarity
