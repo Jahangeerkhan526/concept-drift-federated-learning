@@ -1,0 +1,28 @@
+{
+  "title": "Scenario 2b: Sequential Batch Drift",
+  "cda": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "avg_detection_delay": 0.0,
+    "total_tp": 124,
+    "total_fp": 0,
+    "detected_events": 10,
+    "total_events": 10
+  },
+  "daaw": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "avg_detection_delay": 20.1,
+    "total_tp": 18,
+    "total_fp": 0,
+    "detected_events": 10,
+    "total_events": 10
+  },
+  "computational_time_seconds": {
+    "fedavg": 40.67,
+    "cda": 40.22,
+    "daaw": 42.63
+  }
+}

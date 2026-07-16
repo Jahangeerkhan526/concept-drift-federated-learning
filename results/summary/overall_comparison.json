@@ -1,0 +1,67 @@
+[
+  {
+    "scenario": "HAR Label Shuffle",
+    "drift_type": "Spatial",
+    "character": "Sudden",
+    "provisional": false,
+    "cda_precision": 0.0952,
+    "cda_recall": 1.0,
+    "cda_f1": 0.1739,
+    "daaw_precision": 0.6667,
+    "daaw_recall": 1.0,
+    "daaw_f1": 0.8,
+    "daaw_avg_delay": 1.0
+  },
+  {
+    "scenario": "HAR Activity Drift",
+    "drift_type": "Spatial",
+    "character": "Gradual",
+    "provisional": false,
+    "cda_precision": 0.2917,
+    "cda_recall": 1.0,
+    "cda_f1": 0.4516,
+    "daaw_precision": 0.6,
+    "daaw_recall": 0.75,
+    "daaw_f1": 0.6667,
+    "daaw_avg_delay": 3.67
+  },
+  {
+    "scenario": "Gas Label Shuffle",
+    "drift_type": "Spatial",
+    "character": "Sudden",
+    "provisional": false,
+    "cda_precision": 0.0851,
+    "cda_recall": 1.0,
+    "cda_f1": 0.1569,
+    "daaw_precision": 1.0,
+    "daaw_recall": 1.0,
+    "daaw_f1": 1.0,
+    "daaw_avg_delay": 1.25
+  },
+  {
+    "scenario": "Gas Sudden Batch",
+    "drift_type": "Temporal",
+    "character": "Sudden",
+    "provisional": false,
+    "cda_precision": 0.2353,
+    "cda_recall": 1.0,
+    "cda_f1": 0.381,
+    "daaw_precision": 1.0,
+    "daaw_recall": 0.5,
+    "daaw_f1": 0.6667,
+    "daaw_avg_delay": 3.5
+  },
+  {
+    "scenario": "Gas Sequential Batch",
+    "drift_type": "Temporal",
+    "character": "Gradual",
+    "provisional": false,
+    "cda_precision": 1.0,
+    "cda_recall": 1.0,
+    "cda_f1": 1.0,
+    "daaw_precision": 1.0,
+    "daaw_recall": 1.0,
+    "daaw_f1": 1.0,
+    "daaw_avg_delay": 20.1
+  }
+]
