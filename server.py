@@ -115,6 +115,7 @@ def run_cda_fedavg(num_rounds, num_clients, X, y, client_data, drift_events,
     losses_per_round = []
     cda_detection_round = {}
     cda_detections_per_round = {}
+    detection_time_total = 0.0
     start_time = time.time()
 
     for round_num in range(1, num_rounds + 1):
@@ -165,6 +166,7 @@ def run_cda_fedavg(num_rounds, num_clients, X, y, client_data, drift_events,
             round_sizes[cid] = len(client_data[cid])
             round_losses[cid] = total_loss / max(len(loader), 1)
             round_params.append(get_parameters(model))
+            detection_start = time.time()
             if len(client_loss_history[cid]) > 0:
                 prev_loss = client_loss_history[cid][-1]
                 loss_change = (total_loss - prev_loss) / (prev_loss + 1e-8)
@@ -180,6 +182,7 @@ def run_cda_fedavg(num_rounds, num_clients, X, y, client_data, drift_events,
                     print(f"  Client {cid}: DRIFT DETECTED (loss change: {loss_change:.3f}) → weight reduced to 0.3")
                 else:
                     client_weights[cid] = min(1.0, client_weights[cid] + 0.1)
+            detection_time_total += time.time() - detection_start
             client_loss_history[cid].append(total_loss)
 
         cda_detections_per_round[round_num] = {"tp": round_tp_count, "fp": round_fp_count}
@@ -204,8 +207,9 @@ def run_cda_fedavg(num_rounds, num_clients, X, y, client_data, drift_events,
             print(f"  Client {dclient}: drift NOT detected (missed!)")
 
     total_time = time.time() - start_time
-    print(f"\nCDA-FedAvg complete! Time: {total_time:.2f}s")
-    return results_per_round, losses_per_round, cda_detection_round, cda_detections_per_round, total_time
+    print(f"\nCDA-FedAvg complete! Time: {total_time:.2f}s | Detection-only time: {detection_time_total*1000:.2f}ms")
+    return (results_per_round, losses_per_round, cda_detection_round, cda_detections_per_round,
+            total_time, detection_time_total)
 
 
 def run_daaw(num_rounds, num_clients, X, y, client_data, drift_events,
@@ -228,6 +232,8 @@ def run_daaw(num_rounds, num_clients, X, y, client_data, drift_events,
     drifted_data = {}
     results_per_round = []
     losses_per_round = []
+    similarity_history = {i: [] for i in range(num_clients)}
+    detection_time_total = 0.0
     start_time = time.time()
 
     for round_num in range(1, num_rounds + 1):
@@ -273,12 +279,15 @@ def run_daaw(num_rounds, num_clients, X, y, client_data, drift_events,
                 for before, after in zip(params_before, params_after)
             ])
             client_gradient_history[cid].append(gradient)
+            detection_start = time.time()
             drift_detected, similarity = daaw_detect_drift(
                 client_gradient_history[cid],
                 short_window=short_window,
                 long_window=long_window,
                 threshold=threshold
             )
+            detection_time_total += time.time() - detection_start
+            similarity_history[cid].append(similarity)
             if drift_detected and not client_drift_detected[cid]:
                 client_drift_detected[cid] = True
                 client_weights[cid] = 0.3
@@ -333,8 +342,9 @@ def run_daaw(num_rounds, num_clients, X, y, client_data, drift_events,
             print(f"  Client {dclient}: drift NOT detected (missed!)")
 
     total_time = time.time() - start_time
-    print(f"\nDAAW complete! Time: {total_time:.2f}s")
-    return results_per_round, losses_per_round, drift_detection_round, daaw_detections_per_round, total_time
+    print(f"\nDAAW complete! Time: {total_time:.2f}s | Detection-only time: {detection_time_total*1000:.2f}ms")
+    return (results_per_round, losses_per_round, drift_detection_round, daaw_detections_per_round,
+            total_time, similarity_history, detection_time_total)
 
 
 def compute_detection_metrics(detections_per_round, detection_round_map, drift_events):
@@ -514,6 +524,80 @@ def plot_all_graphs(fedavg_acc, cda_acc, daaw_acc,
     print(f"Graph 5 saved: 5_false_positive_comparison.png")
 
 
+def build_case_study(client_id, drift_round, similarity_history, detection_round_map,
+                      accuracy_per_round, threshold, save_path, rounds_before=3, rounds_after=8):
+    """Round-by-round narrative walkthrough for one client's drift/detection/recovery."""
+    os.makedirs(save_path, exist_ok=True)
+    sims = similarity_history.get(client_id, [])
+    detected_round = detection_round_map.get(client_id)
+
+    start = max(1, drift_round - rounds_before)
+    end = min(len(sims), drift_round + rounds_after)
+
+    timeline = []
+    for r in range(start, end + 1):
+        sim_val = sims[r - 1] if r - 1 < len(sims) else None
+        acc_val = accuracy_per_round[r - 1] if r - 1 < len(accuracy_per_round) else None
+        events = []
+        if r == drift_round:
+            events.append("Drift injected")
+        if sim_val is not None and sim_val < threshold and (r >= drift_round):
+            events.append(f"Similarity below threshold ({sim_val:.3f} < {threshold})")
+        if detected_round is not None and r == detected_round:
+            events.append("DAAW detects drift → client weight reduced to 0.3")
+        timeline.append({
+            "round": r,
+            "similarity": round(float(sim_val), 4) if sim_val is not None else None,
+            "global_accuracy": round(float(acc_val), 4) if acc_val is not None else None,
+            "event": "; ".join(events) if events else "Normal training",
+        })
+
+    case_study = {
+        "client_id": client_id,
+        "drift_injected_round": drift_round,
+        "detected_round": detected_round,
+        "detection_delay_rounds": (detected_round - drift_round) if detected_round else None,
+        "timeline": timeline,
+    }
+    with open(os.path.join(save_path, "case_study.json"), "w") as f:
+        json.dump(case_study, f, indent=2)
+
+    print(f"\nCase study (Client {client_id}, drift at round {drift_round}):")
+    for row in timeline:
+        print(f"  Round {row['round']:>2}: acc={row['global_accuracy']}, "
+              f"similarity={row['similarity']} — {row['event']}")
+    print(f"Case study saved: {save_path}/case_study.json")
+    return case_study
+
+
+def plot_cosine_similarity(similarity_history, drift_events, threshold, save_path, title_suffix=""):
+    """Graph 6: DAAW's gradient cosine similarity per round for each drifted client,
+    showing the similarity dropping below the threshold at/after injection."""
+    os.makedirs(save_path, exist_ok=True)
+    colors = ["red", "purple", "orange", "cyan"]
+    fig, ax = plt.subplots(figsize=(14, 7))
+
+    for i, (dclient, dround) in enumerate(drift_events.items()):
+        sims = similarity_history.get(dclient, [])
+        if not sims:
+            continue
+        rounds = list(range(1, len(sims) + 1))
+        color = colors[i % len(colors)]
+        ax.plot(rounds, sims, label=f"Client {dclient} (drift at round {dround})", color=color, linewidth=2)
+        ax.axvline(x=dround, color=color, linestyle="--", alpha=0.6, linewidth=1.2)
+
+    ax.axhline(y=threshold, color="black", linestyle=":", linewidth=1.5, label=f"Threshold ({threshold})")
+    ax.set_xlabel("Communication Round", fontsize=12)
+    ax.set_ylabel("Gradient Cosine Similarity", fontsize=12)
+    ax.set_title(f"DAAW — Gradient Cosine Similarity per Round\n{title_suffix}", fontsize=13)
+    ax.legend(fontsize=9)
+    ax.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(os.path.join(save_path, "6_cosine_similarity.png"), dpi=150)
+    plt.close()
+    print(f"Graph 6 saved: 6_cosine_similarity.png")
+
+
 if __name__ == "__main__":
     NUM_ROUNDS = 50
     NUM_CLIENTS = 10
@@ -534,9 +618,9 @@ if __name__ == "__main__":
     shared_data_s1 = partition_noniid(X, y, num_clients=NUM_CLIENTS, alpha=ALPHA)
 
     fedavg_r1, fedavg_loss1, fedavg_t1 = run_fedavg(NUM_ROUNDS, NUM_CLIENTS, X, y, shared_data_s1)
-    cda_r1, cda_loss1, cda_det1, cda_dpr1, cda_t1 = run_cda_fedavg(
+    cda_r1, cda_loss1, cda_det1, cda_dpr1, cda_t1, cda_dettime1 = run_cda_fedavg(
         NUM_ROUNDS, NUM_CLIENTS, X, y, shared_data_s1, DRIFT_EVENTS, drift_type="label")
-    daaw_r1, daaw_loss1, det1, daaw_dpr1, daaw_t1 = run_daaw(
+    daaw_r1, daaw_loss1, det1, daaw_dpr1, daaw_t1, sim_hist1, daaw_dettime1 = run_daaw(
         NUM_ROUNDS, NUM_CLIENTS, X, y, shared_data_s1, DRIFT_EVENTS, drift_type="label")
 
     plot_all_graphs(fedavg_r1, cda_r1, daaw_r1,
@@ -545,11 +629,20 @@ if __name__ == "__main__":
                     fedavg_time=fedavg_t1, cda_time=cda_t1, daaw_time=daaw_t1,
                     save_path="results/spatial_drift/har_label_shuffle",
                     title_suffix="Scenario 1: Label Shuffle (Real Drift)")
+    plot_cosine_similarity(sim_hist1, DRIFT_EVENTS, threshold=0.3,
+                            save_path="results/spatial_drift/har_label_shuffle",
+                            title_suffix="Scenario 1: Label Shuffle")
+    build_case_study(client_id=3, drift_round=DRIFT_EVENTS[3],
+                      similarity_history=sim_hist1, detection_round_map=det1,
+                      accuracy_per_round=daaw_r1, threshold=0.3,
+                      save_path="results/spatial_drift/har_label_shuffle")
 
     cda_metrics1 = compute_detection_metrics(cda_dpr1, cda_det1, DRIFT_EVENTS)
     daaw_metrics1 = compute_detection_metrics(daaw_dpr1, det1, DRIFT_EVENTS)
     save_metrics_summary(cda_metrics1, daaw_metrics1,
-                          {"fedavg": round(fedavg_t1, 2), "cda": round(cda_t1, 2), "daaw": round(daaw_t1, 2)},
+                          {"fedavg": round(fedavg_t1, 2), "cda": round(cda_t1, 2), "daaw": round(daaw_t1, 2),
+                           "cda_detection_ms": round(cda_dettime1 * 1000, 3),
+                           "daaw_detection_ms": round(daaw_dettime1 * 1000, 3)},
                           save_path="results/spatial_drift/har_label_shuffle",
                           title_suffix="Scenario 1: Label Shuffle")
 
@@ -571,9 +664,9 @@ if __name__ == "__main__":
     shared_data_s2 = partition_noniid(X, y, num_clients=NUM_CLIENTS, alpha=ALPHA)
 
     fedavg_r2, fedavg_loss2, fedavg_t2 = run_fedavg(NUM_ROUNDS, NUM_CLIENTS, X, y, shared_data_s2)
-    cda_r2, cda_loss2, cda_det2, cda_dpr2, cda_t2 = run_cda_fedavg(
+    cda_r2, cda_loss2, cda_det2, cda_dpr2, cda_t2, cda_dettime2 = run_cda_fedavg(
         NUM_ROUNDS, NUM_CLIENTS, X, y, shared_data_s2, DRIFT_EVENTS, drift_type="activity")
-    daaw_r2, daaw_loss2, det2, daaw_dpr2, daaw_t2 = run_daaw(
+    daaw_r2, daaw_loss2, det2, daaw_dpr2, daaw_t2, sim_hist2, daaw_dettime2 = run_daaw(
         NUM_ROUNDS, NUM_CLIENTS, X, y, shared_data_s2, DRIFT_EVENTS, drift_type="activity")
 
     plot_all_graphs(fedavg_r2, cda_r2, daaw_r2,
@@ -582,11 +675,16 @@ if __name__ == "__main__":
                     fedavg_time=fedavg_t2, cda_time=cda_t2, daaw_time=daaw_t2,
                     save_path="results/spatial_drift/har_activity_drift",
                     title_suffix="Scenario 2: Activity Distribution Drift")
+    plot_cosine_similarity(sim_hist2, DRIFT_EVENTS, threshold=0.3,
+                            save_path="results/spatial_drift/har_activity_drift",
+                            title_suffix="Scenario 2: Activity Distribution Drift")
 
     cda_metrics2 = compute_detection_metrics(cda_dpr2, cda_det2, DRIFT_EVENTS)
     daaw_metrics2 = compute_detection_metrics(daaw_dpr2, det2, DRIFT_EVENTS)
     save_metrics_summary(cda_metrics2, daaw_metrics2,
-                          {"fedavg": round(fedavg_t2, 2), "cda": round(cda_t2, 2), "daaw": round(daaw_t2, 2)},
+                          {"fedavg": round(fedavg_t2, 2), "cda": round(cda_t2, 2), "daaw": round(daaw_t2, 2),
+                           "cda_detection_ms": round(cda_dettime2 * 1000, 3),
+                           "daaw_detection_ms": round(daaw_dettime2 * 1000, 3)},
                           save_path="results/spatial_drift/har_activity_drift",
                           title_suffix="Scenario 2: Activity Distribution Drift")
 

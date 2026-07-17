@@ -21,8 +21,10 @@
     "total_events": 4
   },
   "computational_time_seconds": {
-    "fedavg": 65.52,
-    "cda": 68.59,
-    "daaw": 68.42
+    "fedavg": 66.7,
+    "cda": 77.06,
+    "daaw": 74.25,
+    "cda_detection_ms": 13.487,
+    "daaw_detection_ms": 729.883
   }
 }

@@ -128,6 +128,7 @@ def run_cda_fedavg_gas(num_rounds, num_clients, X, y, client_data, drift_events,
     # Track CDA detections per round for graph
     cda_detections_per_round = {}
     cda_detection_round = {}
+    detection_time_total = 0.0
     start_time = time.time()
 
     # In sequential mode every client's data changes at every batch boundary,
@@ -192,6 +193,7 @@ def run_cda_fedavg_gas(num_rounds, num_clients, X, y, client_data, drift_events,
             round_sizes[cid] = len(client_data[cid])
             round_params.append(get_parameters(model))
 
+            detection_start = time.time()
             if len(client_loss_history[cid]) > 0:
                 prev_loss = client_loss_history[cid][-1]
                 loss_change = (total_loss - prev_loss) / (prev_loss + 1e-8)
@@ -210,6 +212,7 @@ def run_cda_fedavg_gas(num_rounds, num_clients, X, y, client_data, drift_events,
                     print(f"  Client {cid}: DRIFT DETECTED (loss change: {loss_change:.3f}) → weight reduced to 0.3")
                 else:
                     client_weights[cid] = min(1.0, client_weights[cid] + 0.1)
+            detection_time_total += time.time() - detection_start
             client_loss_history[cid].append(total_loss)
 
         cda_detections_per_round[round_num] = {
@@ -237,8 +240,9 @@ def run_cda_fedavg_gas(num_rounds, num_clients, X, y, client_data, drift_events,
             print(f"  Client {dclient}: drift NOT detected (missed!)")
 
     total_time = time.time() - start_time
-    print(f"\nCDA-FedAvg Gas complete! Time: {total_time:.2f}s")
-    return results_per_round, losses_per_round, cda_detection_round, cda_detections_per_round, total_time
+    print(f"\nCDA-FedAvg Gas complete! Time: {total_time:.2f}s | Detection-only time: {detection_time_total*1000:.2f}ms")
+    return (results_per_round, losses_per_round, cda_detection_round, cda_detections_per_round,
+            total_time, detection_time_total)
 
 
 def run_daaw_gas(num_rounds, num_clients, X, y, client_data, drift_events,
@@ -261,6 +265,8 @@ def run_daaw_gas(num_rounds, num_clients, X, y, client_data, drift_events,
     results_per_round = []
     losses_per_round = []
     daaw_detections_per_round = {}
+    similarity_history = {i: [] for i in range(num_clients)}
+    detection_time_total = 0.0
     start_time = time.time()
 
     # See run_cda_fedavg_gas , same reasoning for sequential mode's ground truth.
@@ -318,12 +324,15 @@ def run_daaw_gas(num_rounds, num_clients, X, y, client_data, drift_events,
             ])
             client_gradient_history[cid].append(gradient)
 
+            detection_start = time.time()
             drift_detected, similarity = daaw_detect_drift(
                 client_gradient_history[cid],
                 short_window=short_window,
                 long_window=long_window,
                 threshold=threshold
             )
+            detection_time_total += time.time() - detection_start
+            similarity_history[cid].append(similarity)
 
             if drift_detected and not client_drift_detected[cid]:
                 client_drift_detected[cid] = True
@@ -388,8 +397,9 @@ def run_daaw_gas(num_rounds, num_clients, X, y, client_data, drift_events,
             print(f"  Client {dclient}: drift NOT detected (missed!)")
 
     total_time = time.time() - start_time
-    print(f"\nDAAW Gas complete! Time: {total_time:.2f}s")
-    return results_per_round, losses_per_round, drift_detection_round, daaw_detections_per_round, total_time
+    print(f"\nDAAW Gas complete! Time: {total_time:.2f}s | Detection-only time: {detection_time_total*1000:.2f}ms")
+    return (results_per_round, losses_per_round, drift_detection_round, daaw_detections_per_round,
+            total_time, similarity_history, detection_time_total)
 
 
 def compute_detection_metrics(detections_per_round, detection_round_map, drift_events):
@@ -570,6 +580,35 @@ def plot_all_graphs(fedavg_acc, cda_acc, daaw_acc,
     plt.close()
     print(f"Graph 5 saved: 5_false_positive_comparison.png")
 
+
+def plot_cosine_similarity(similarity_history, drift_events, threshold, save_path, title_suffix=""):
+    """Graph 6: DAAW's gradient cosine similarity per round for each drifted client,
+    showing the similarity dropping below the threshold at/after injection."""
+    os.makedirs(save_path, exist_ok=True)
+    colors = ["red", "purple", "orange", "cyan"]
+    fig, ax = plt.subplots(figsize=(14, 7))
+
+    for i, (dclient, dround) in enumerate(drift_events.items()):
+        sims = similarity_history.get(dclient, [])
+        if not sims:
+            continue
+        rounds = list(range(1, len(sims) + 1))
+        color = colors[i % len(colors)]
+        ax.plot(rounds, sims, label=f"Client {dclient} (drift at round {dround})", color=color, linewidth=2)
+        ax.axvline(x=dround, color=color, linestyle="--", alpha=0.6, linewidth=1.2)
+
+    ax.axhline(y=threshold, color="black", linestyle=":", linewidth=1.5, label=f"Threshold ({threshold})")
+    ax.set_xlabel("Communication Round", fontsize=12)
+    ax.set_ylabel("Gradient Cosine Similarity", fontsize=12)
+    ax.set_title(f"Gas Sensor — DAAW Gradient Cosine Similarity per Round\n{title_suffix}", fontsize=13)
+    ax.legend(fontsize=9)
+    ax.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(os.path.join(save_path, "6_cosine_similarity.png"), dpi=150)
+    plt.close()
+    print(f"Graph 6 saved: 6_cosine_similarity.png")
+
+
 if __name__ == "__main__":
     ALPHA = 0.5
     NUM_ROUNDS = 50
@@ -590,9 +629,9 @@ if __name__ == "__main__":
 
     fedavg_acc1, fedavg_loss1, fedavg_t1 = run_fedavg_gas(
         NUM_ROUNDS, NUM_CLIENTS, X, y, shared_data_s1)
-    cda_acc1, cda_loss1, cda_det1, cda_dpr1, cda_t1 = run_cda_fedavg_gas(
+    cda_acc1, cda_loss1, cda_det1, cda_dpr1, cda_t1, cda_dettime1 = run_cda_fedavg_gas(
         NUM_ROUNDS, NUM_CLIENTS, X, y, shared_data_s1, DRIFT_EVENTS, drift_type="label")
-    daaw_acc1, daaw_loss1, det1, daaw_dpr1, daaw_t1 = run_daaw_gas(
+    daaw_acc1, daaw_loss1, det1, daaw_dpr1, daaw_t1, sim_hist1, daaw_dettime1 = run_daaw_gas(
         NUM_ROUNDS, NUM_CLIENTS, X, y, shared_data_s1, DRIFT_EVENTS, drift_type="label")
 
     plot_all_graphs(
@@ -602,11 +641,16 @@ if __name__ == "__main__":
         fedavg_time=fedavg_t1, cda_time=cda_t1, daaw_time=daaw_t1,
         save_path="results/spatial_drift/gas_label_shuffle",
         title_suffix="Scenario 1: Label Shuffle (Real Drift)")
+    plot_cosine_similarity(sim_hist1, DRIFT_EVENTS, threshold=0.3,
+                            save_path="results/spatial_drift/gas_label_shuffle",
+                            title_suffix="Scenario 1: Label Shuffle")
 
     cda_metrics1 = compute_detection_metrics(cda_dpr1, cda_det1, DRIFT_EVENTS)
     daaw_metrics1 = compute_detection_metrics(daaw_dpr1, det1, DRIFT_EVENTS)
     save_metrics_summary(cda_metrics1, daaw_metrics1,
-                          {"fedavg": round(fedavg_t1, 2), "cda": round(cda_t1, 2), "daaw": round(daaw_t1, 2)},
+                          {"fedavg": round(fedavg_t1, 2), "cda": round(cda_t1, 2), "daaw": round(daaw_t1, 2),
+                           "cda_detection_ms": round(cda_dettime1 * 1000, 3),
+                           "daaw_detection_ms": round(daaw_dettime1 * 1000, 3)},
                           save_path="results/spatial_drift/gas_label_shuffle",
                           title_suffix="Scenario 1: Label Shuffle")
 
@@ -630,10 +674,10 @@ if __name__ == "__main__":
 
     fedavg_acc2a, fedavg_loss2a, fedavg_t2a = run_fedavg_gas(
         NUM_ROUNDS, NUM_CLIENTS, X2, y2, shared_data_s2a)
-    cda_acc2a, cda_loss2a, cda_det2a, cda_dpr2a, cda_t2a = run_cda_fedavg_gas(
+    cda_acc2a, cda_loss2a, cda_det2a, cda_dpr2a, cda_t2a, cda_dettime2a = run_cda_fedavg_gas(
         NUM_ROUNDS, NUM_CLIENTS, X2, y2, shared_data_s2a, DRIFT_EVENTS,
         drift_type="batch", batch_ids=batch_ids)
-    daaw_acc2a, daaw_loss2a, det2a, daaw_dpr2a, daaw_t2a = run_daaw_gas(
+    daaw_acc2a, daaw_loss2a, det2a, daaw_dpr2a, daaw_t2a, sim_hist2a, daaw_dettime2a = run_daaw_gas(
         NUM_ROUNDS, NUM_CLIENTS, X2, y2, shared_data_s2a, DRIFT_EVENTS,
         drift_type="batch", batch_ids=batch_ids)
 
@@ -644,11 +688,16 @@ if __name__ == "__main__":
         fedavg_time=fedavg_t2a, cda_time=cda_t2a, daaw_time=daaw_t2a,
         save_path="results/temporal_drift/gas_sudden_batch",
         title_suffix="Scenario 2a: Sudden Batch Drift (1-3 → 8-10)")
+    plot_cosine_similarity(sim_hist2a, DRIFT_EVENTS, threshold=0.3,
+                            save_path="results/temporal_drift/gas_sudden_batch",
+                            title_suffix="Scenario 2a: Sudden Batch Drift")
 
     cda_metrics2a = compute_detection_metrics(cda_dpr2a, cda_det2a, DRIFT_EVENTS)
     daaw_metrics2a = compute_detection_metrics(daaw_dpr2a, det2a, DRIFT_EVENTS)
     save_metrics_summary(cda_metrics2a, daaw_metrics2a,
-                          {"fedavg": round(fedavg_t2a, 2), "cda": round(cda_t2a, 2), "daaw": round(daaw_t2a, 2)},
+                          {"fedavg": round(fedavg_t2a, 2), "cda": round(cda_t2a, 2), "daaw": round(daaw_t2a, 2),
+                           "cda_detection_ms": round(cda_dettime2a * 1000, 3),
+                           "daaw_detection_ms": round(daaw_dettime2a * 1000, 3)},
                           save_path="results/temporal_drift/gas_sudden_batch",
                           title_suffix="Scenario 2a: Sudden Batch Drift")
 
@@ -671,10 +720,10 @@ if __name__ == "__main__":
     fedavg_acc2b, fedavg_loss2b, fedavg_t2b = run_fedavg_gas(
         NUM_ROUNDS, NUM_CLIENTS, X2, y2, shared_data_s2b,
         drift_type="sequential", batch_ids=batch_ids)
-    cda_acc2b, cda_loss2b, cda_det2b, cda_dpr2b, cda_t2b = run_cda_fedavg_gas(
+    cda_acc2b, cda_loss2b, cda_det2b, cda_dpr2b, cda_t2b, cda_dettime2b = run_cda_fedavg_gas(
         NUM_ROUNDS, NUM_CLIENTS, X2, y2, shared_data_s2b, DRIFT_EVENTS,
         drift_type="sequential", batch_ids=batch_ids)
-    daaw_acc2b, daaw_loss2b, det2b, daaw_dpr2b, daaw_t2b = run_daaw_gas(
+    daaw_acc2b, daaw_loss2b, det2b, daaw_dpr2b, daaw_t2b, sim_hist2b, daaw_dettime2b = run_daaw_gas(
         NUM_ROUNDS, NUM_CLIENTS, X2, y2, shared_data_s2b, DRIFT_EVENTS,
         drift_type="sequential", batch_ids=batch_ids,
         short_window=8,
@@ -688,6 +737,9 @@ if __name__ == "__main__":
         fedavg_time=fedavg_t2b, cda_time=cda_t2b, daaw_time=daaw_t2b,
         save_path="results/temporal_drift/gas_sequential_batch",
         title_suffix="Scenario 2b: Sequential Batch Drift (1→10)")
+    plot_cosine_similarity(sim_hist2b, DRIFT_EVENTS, threshold=0.15,
+                            save_path="results/temporal_drift/gas_sequential_batch",
+                            title_suffix="Scenario 2b: Sequential Batch Drift")
 
     # In sequential mode every client genuinely drifts at every batch boundary,
     # not just the 4 clients in DRIFT_EVENTS , so ground truth for precision/
@@ -698,7 +750,9 @@ if __name__ == "__main__":
     cda_metrics2b = compute_detection_metrics(cda_dpr2b, cda_det2b, SEQUENTIAL_GROUND_TRUTH)
     daaw_metrics2b = compute_detection_metrics(daaw_dpr2b, det2b, SEQUENTIAL_GROUND_TRUTH)
     save_metrics_summary(cda_metrics2b, daaw_metrics2b,
-                          {"fedavg": round(fedavg_t2b, 2), "cda": round(cda_t2b, 2), "daaw": round(daaw_t2b, 2)},
+                          {"fedavg": round(fedavg_t2b, 2), "cda": round(cda_t2b, 2), "daaw": round(daaw_t2b, 2),
+                           "cda_detection_ms": round(cda_dettime2b * 1000, 3),
+                           "daaw_detection_ms": round(daaw_dettime2b * 1000, 3)},
                           save_path="results/temporal_drift/gas_sequential_batch",
                           title_suffix="Scenario 2b: Sequential Batch Drift")
 

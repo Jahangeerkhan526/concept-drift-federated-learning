@@ -23,9 +23,9 @@ def run_har_at_alpha(alpha, save_path):
     client_data = partition_noniid(X, y, num_clients=NUM_CLIENTS, alpha=alpha)
 
     fedavg_r, fedavg_loss, fedavg_t = server.run_fedavg(NUM_ROUNDS, NUM_CLIENTS, X, y, client_data)
-    cda_r, cda_loss, cda_det, cda_dpr, cda_t = server.run_cda_fedavg(
+    cda_r, cda_loss, cda_det, cda_dpr, cda_t, cda_dettime = server.run_cda_fedavg(
         NUM_ROUNDS, NUM_CLIENTS, X, y, client_data, DRIFT_EVENTS, drift_type="label")
-    daaw_r, daaw_loss, daaw_det, daaw_dpr, daaw_t = server.run_daaw(
+    daaw_r, daaw_loss, daaw_det, daaw_dpr, daaw_t, sim_hist, daaw_dettime = server.run_daaw(
         NUM_ROUNDS, NUM_CLIENTS, X, y, client_data, DRIFT_EVENTS, drift_type="label")
 
     server.plot_all_graphs(fedavg_r, cda_r, daaw_r, fedavg_loss, cda_loss, daaw_loss,
@@ -48,9 +48,9 @@ def run_gas_at_alpha(alpha, save_path):
     client_data = partition_noniid_gas(X, y, num_clients=NUM_CLIENTS, alpha=alpha)
 
     fedavg_r, fedavg_loss, fedavg_t = server_gas.run_fedavg_gas(NUM_ROUNDS, NUM_CLIENTS, X, y, client_data)
-    cda_r, cda_loss, cda_det, cda_dpr, cda_t = server_gas.run_cda_fedavg_gas(
+    cda_r, cda_loss, cda_det, cda_dpr, cda_t, cda_dettime = server_gas.run_cda_fedavg_gas(
         NUM_ROUNDS, NUM_CLIENTS, X, y, client_data, DRIFT_EVENTS, drift_type="label")
-    daaw_r, daaw_loss, daaw_det, daaw_dpr, daaw_t = server_gas.run_daaw_gas(
+    daaw_r, daaw_loss, daaw_det, daaw_dpr, daaw_t, sim_hist, daaw_dettime = server_gas.run_daaw_gas(
         NUM_ROUNDS, NUM_CLIENTS, X, y, client_data, DRIFT_EVENTS, drift_type="label")
 
     server_gas.plot_all_graphs(fedavg_r, cda_r, daaw_r, fedavg_loss, cda_loss, daaw_loss,
@@ -73,9 +73,9 @@ def run_gas_at_window_combo(short_window, long_window, threshold, label, save_pa
     client_data = partition_noniid_gas(X, y, num_clients=NUM_CLIENTS, alpha=0.5)
 
     fedavg_r, fedavg_loss, fedavg_t = server_gas.run_fedavg_gas(NUM_ROUNDS, NUM_CLIENTS, X, y, client_data)
-    cda_r, cda_loss, cda_det, cda_dpr, cda_t = server_gas.run_cda_fedavg_gas(
+    cda_r, cda_loss, cda_det, cda_dpr, cda_t, cda_dettime = server_gas.run_cda_fedavg_gas(
         NUM_ROUNDS, NUM_CLIENTS, X, y, client_data, DRIFT_EVENTS, drift_type="label")
-    daaw_r, daaw_loss, daaw_det, daaw_dpr, daaw_t = server_gas.run_daaw_gas(
+    daaw_r, daaw_loss, daaw_det, daaw_dpr, daaw_t, sim_hist, daaw_dettime = server_gas.run_daaw_gas(
         NUM_ROUNDS, NUM_CLIENTS, X, y, client_data, DRIFT_EVENTS, drift_type="label",
         short_window=short_window, long_window=long_window, threshold=threshold)
 

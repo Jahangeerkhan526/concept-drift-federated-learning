@@ -1,0 +1,80 @@
+{
+  "client_id": 3,
+  "drift_injected_round": 5,
+  "detected_round": 6,
+  "detection_delay_rounds": 1,
+  "timeline": [
+    {
+      "round": 2,
+      "similarity": 1.0,
+      "global_accuracy": 0.8739,
+      "event": "Normal training"
+    },
+    {
+      "round": 3,
+      "similarity": 1.0,
+      "global_accuracy": 0.8928,
+      "event": "Normal training"
+    },
+    {
+      "round": 4,
+      "similarity": 1.0,
+      "global_accuracy": 0.9004,
+      "event": "Normal training"
+    },
+    {
+      "round": 5,
+      "similarity": 1.0,
+      "global_accuracy": 0.886,
+      "event": "Drift injected"
+    },
+    {
+      "round": 6,
+      "similarity": 0.1909,
+      "global_accuracy": 0.894,
+      "event": "Similarity below threshold (0.191 < 0.3); DAAW detects drift \u2192 client weight reduced to 0.3"
+    },
+    {
+      "round": 7,
+      "similarity": -0.0659,
+      "global_accuracy": 0.8928,
+      "event": "Similarity below threshold (-0.066 < 0.3)"
+    },
+    {
+      "round": 8,
+      "similarity": -0.1658,
+      "global_accuracy": 0.8996,
+      "event": "Similarity below threshold (-0.166 < 0.3)"
+    },
+    {
+      "round": 9,
+      "similarity": -0.2268,
+      "global_accuracy": 0.9042,
+      "event": "Similarity below threshold (-0.227 < 0.3)"
+    },
+    {
+      "round": 10,
+      "similarity": 0.1794,
+      "global_accuracy": 0.9046,
+      "event": "Similarity below threshold (0.179 < 0.3)"
+    },
+    {
+      "round": 11,
+      "similarity": 0.4973,
+      "global_accuracy": 0.9075,
+      "event": "Normal training"
+    },
+    {
+      "round": 12,
+      "similarity": 0.6627,
+      "global_accuracy": 0.9129,
+      "event": "Normal training"
+    },
+    {
+      "round": 13,
+      "similarity": 0.7586,
+      "global_accuracy": 0.916,
+      "event": "Normal training"
+    }
+  ]
+}
