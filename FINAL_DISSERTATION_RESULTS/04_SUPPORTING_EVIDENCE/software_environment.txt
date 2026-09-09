@@ -1,0 +1,13 @@
+Software Environment
+=====================
+Recorded directly from the fl_env virtual environment used to produce all
+results in this folder (checked at export time, not written from memory).
+
+Python: 3.12.10 (CPython, MSC v.1943 64 bit AMD64)
+torch: 2.11.0+cpu
+numpy: 2.4.4
+scipy: 1.17.1
+matplotlib: 3.10.8
+
+Platform: Windows 11
+Execution: CPU only (no GPU used for any reported result)

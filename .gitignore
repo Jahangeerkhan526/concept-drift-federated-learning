@@ -1,11 +1,86 @@
-fl_env/
+# Python and test caches
 __pycache__/
-data/har_cache.pkl
-data/gas+sensor+array+drift+dataset.zip
-data/gas_cache.pkl
-data/gas_cache_batches.pkl
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.coverage
+
+# Virtual environments
+fl_env/
+venv/
+.venv/
+env/
+
+# Editors and operating-system files
+.vscode/
+.idea/
 .DS_Store
-*.pyc
-data/UCI HAR Dataset/
-z_guide/
+Thumbs.db
+desktop.ini
+
+# Raw datasets and generated caches
+data/
+datasets/
+cache/
+.cache/
+*.pkl
+*.pickle
+*.npy
+*.npz
+
+# Uncurated and historical experiment outputs
+results/
+myfinalresult/
+myfinalresult_v2/
+myfinalresult_v3/
+final_results/
+testing_adaptive_daaw/outputs/
+testing_adaptive_daaw/
+experiments/
+
+# Temporary logs and working exports
+*.log
+gate_test_*
+threshold_sweep_log.txt
+test_v3_output.txt
+verify_event_metrics_output.txt
+fl/
 dt/
+
+# Superseded pipeline and local plotting/development helpers
+app.py
+client.py
+client_gas.py
+server.py
+server_gas.py
+significance_test.py
+utils_gas.py
+build_synthesis.py
+build_final_results.py
+communication_cost.py
+sensitivity_sweep.py
+threshold_sensitivity.py
+make_project_design_figures.py
+make_results_figures.py
+experiment_history.json
+label_shuffle_v4_all_seeds.json
+label_shuffle_v4_log.txt
+
+# Archives, reports and private/administrative documents
+*.zip
+*.docx
+*.pdf
+*.xlsx
+*ethics*
+*UREC*
+*consent*
+
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+
+# Curated final evidence remains trackable
+!FINAL_DISSERTATION_RESULTS/
+!FINAL_DISSERTATION_RESULTS/**
+FINAL_DISSERTATION_RESULTS/03_EXPLORATORY_ADAPTIVE/development_seed_42/adaptive_threshold/diagnostic_traces/

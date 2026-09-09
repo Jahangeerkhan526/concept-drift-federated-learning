@@ -144,9 +144,8 @@ def _disjoint_pool_split_sample(pool, train_size, test_size):
     return train_sampled, test_sampled
 
 
-def inject_activity_drift(X, y, indices, train_size, test_size,
-                           target_activities=(1, 2),
-                           target_ratio=0.8):
+def inject_activity_drift(X, y, train_indices, test_indices, seed=0,
+                           target_activities=(1, 2), target_ratio=0.5):
     """
     Scenario 2 , Activity Distribution Drift for UCI HAR.
     Shift client data distribution toward specific activities.
@@ -157,42 +156,50 @@ def inject_activity_drift(X, y, indices, train_size, test_size,
     Default: shift toward Walking Upstairs (1) and
     Walking Downstairs (2) , more dynamic activities.
 
-    target_activities: activity class IDs to shift toward
-    target_ratio: proportion of drifted data from target activities
+    V4 fix: the V3 fix (restricting sampling to the client's own partition)
+    exposed a second problem — a fixed 0.8 target_ratio applied to
+    train_size/test_size derived from the client's FULL partition routinely
+    asked for far more target-activity samples than a client's own partition
+    actually has (e.g. one client needed ~500 but had 146 available),
+    forcing 3-5x with-replacement duplication that diluted the actual
+    distributional shift into mostly-repeated samples.
 
-    Returns (X_train, y_train, X_test, y_test). Target-activity samples and
-    "remaining" samples are each split into disjoint train/test sub-pools
-    before sampling, so a with-replacement draw (when the global target pool
-    is smaller than what's needed) can't place the same sample in both sets.
+    V5 also preserves the client's original held-out boundary permanently:
+    post-drift training samples are selected only from the original training
+    split, and post-drift evaluation samples only from the original test
+    split. This prevents a formerly held-out sample from later entering
+    training after drift.
+
+    Each split is sized from what the client actually has:
+    every one of the client's own target-activity samples, plus a matching
+    *unique, non-duplicated* downsample of non-target samples sized so the
+    combined pool sits at `target_ratio` (default 0.5 — a client with 146
+    target samples gets a clean 146/146 = 292-sample pool, a real 23%->50%
+    shift with zero duplication). Train/test is a single fixed, seeded,
+    non-overlapping split of that pool — computed once, never resampled.
+
+    Returns (X_train, y_train, X_test, y_test).
     """
-    n_target_train = int(train_size * target_ratio)
-    n_target_test = int(test_size * target_ratio)
-    n_remaining_train = train_size - n_target_train
-    n_remaining_test = test_size - n_target_test
+    def select_unique(split_indices, split_seed):
+        split_indices = np.asarray(split_indices, dtype=int)
+        if len(split_indices) == 0:
+            return split_indices
+        local_rng = np.random.RandomState(split_seed)
+        target = split_indices[np.isin(y[split_indices], target_activities)].copy()
+        remaining = split_indices[~np.isin(y[split_indices], target_activities)].copy()
+        local_rng.shuffle(target)
+        local_rng.shuffle(remaining)
+        if len(target) == 0:
+            return split_indices.copy()
+        wanted_remaining = int(len(target) * (1 - target_ratio) / target_ratio) if target_ratio > 0 else 0
+        selected = np.concatenate([target, remaining[:min(wanted_remaining, len(remaining))]])
+        local_rng.shuffle(selected)
+        return selected
 
-    target_mask = np.isin(y, target_activities)
-    target_idx = np.where(target_mask)[0]
-
-    if len(target_idx) == 0:
-        # Fallback , label shuffle, still respecting the train/test split.
-        X_train = X[indices][:train_size].copy()
-        y_train = y[indices][:train_size].copy()
-        np.random.shuffle(y_train)
-        X_test = X[indices][train_size:train_size + test_size].copy()
-        y_test = y[indices][train_size:train_size + test_size].copy()
-        np.random.shuffle(y_test)
-        return X_train, y_train, X_test, y_test
-
-    target_train_idx, target_test_idx = _disjoint_pool_split_sample(target_idx, n_target_train, n_target_test)
-    remaining_train_idx, remaining_test_idx = _disjoint_pool_split_sample(
-        np.arange(len(indices)), n_remaining_train, n_remaining_test)
-
-    X_train = np.concatenate([X[target_train_idx], X[indices][remaining_train_idx]]).astype(np.float32)
-    y_train = np.concatenate([y[target_train_idx], y[indices][remaining_train_idx]])
-    X_test = np.concatenate([X[target_test_idx], X[indices][remaining_test_idx]]).astype(np.float32)
-    y_test = np.concatenate([y[target_test_idx], y[indices][remaining_test_idx]])
-
-    return X_train, y_train, X_test, y_test
+    selected_train = select_unique(train_indices, seed)
+    selected_test = select_unique(test_indices, seed + 1)
+    return (X[selected_train].astype(np.float32), y[selected_train].copy(),
+            X[selected_test].astype(np.float32), y[selected_test].copy())
 
 
 def cosine_similarity(v1, v2):

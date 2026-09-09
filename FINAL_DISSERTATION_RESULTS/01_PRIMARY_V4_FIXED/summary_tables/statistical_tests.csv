@@ -1,0 +1,6 @@
+scenario,cda_f1_mean,cda_f1_sd,daaw_f1_mean,daaw_f1_sd,t_statistic,p_value,significant_at_0.05
+har_label_shuffle,0.3981,0.0315,0.9778,0.0497,32.987,5.036e-06,Yes
+har_activity_drift,0.3974,0.0252,0.0,0.0,-35.249,3.866e-06,Yes
+gas_label_shuffle,0.4013,0.0259,1.0,0.0,51.672,8.396e-07,Yes
+gas_sudden_batch,0.4122,0.0537,0.579,0.1931,1.968,0.1204,No
+gas_sequential_batch,1.0,0.0,0.2363,0.1475,-11.576,0.0003181,Yes

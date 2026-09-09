@@ -1,0 +1,9 @@
+component,configuration
+Clients,10
+Rounds,50
+Datasets,"UCI HAR, Gas Sensor Array"
+Scenarios,"5 (label shuffle x2, activity drift, sudden batch, sequential batch)"
+Seeds,"5 (42, 123, 456, 789, 999)"
+Methods,"FedAvg, CDA-FedAvg, DAAW"
+Metrics,"Event-level Precision, Recall, F1, false alarm episodes, detection delay, accuracy"
+Pipeline version,"V4 (corrected client-ownership partitioning, sample-weighted loss, permanent train/test boundary)"

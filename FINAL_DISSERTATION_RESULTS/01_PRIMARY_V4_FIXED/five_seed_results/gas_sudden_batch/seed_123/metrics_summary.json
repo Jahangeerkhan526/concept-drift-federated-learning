@@ -1,0 +1,26 @@
+{
+  "seed": 123,
+  "fedavg_acc": 0.9416873449131513,
+  "cda_acc": 0.9466501240694789,
+  "daaw_acc": 0.9392059553349876,
+  "cda": {
+    "precision": 0.2222,
+    "recall": 1.0,
+    "f1": 0.3636,
+    "avg_detection_delay": 0.0,
+    "total_tp": 2,
+    "total_fp": 14,
+    "detected_events": 4,
+    "total_events": 4
+  },
+  "daaw": {
+    "precision": 0.6667,
+    "recall": 0.5,
+    "f1": 0.5714,
+    "avg_detection_delay": 4.0,
+    "total_tp": 2,
+    "total_fp": 1,
+    "detected_events": 2,
+    "total_events": 4
+  }
+}

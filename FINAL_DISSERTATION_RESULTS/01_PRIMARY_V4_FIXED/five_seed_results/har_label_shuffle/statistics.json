@@ -1,0 +1,80 @@
+{
+  "n_seeds": 5,
+  "seeds": [
+    42,
+    123,
+    456,
+    789,
+    999
+  ],
+  "fedavg_acc": {
+    "mean": 0.78,
+    "std": 0.0251
+  },
+  "cda_acc": {
+    "mean": 0.7767,
+    "std": 0.0265
+  },
+  "daaw_acc": {
+    "mean": 0.7752,
+    "std": 0.0316
+  },
+  "cda": {
+    "precision": {
+      "mean": 0.2489,
+      "std": 0.0244
+    },
+    "recall": {
+      "mean": 1.0,
+      "std": 0.0
+    },
+    "f1": {
+      "mean": 0.3981,
+      "std": 0.0315
+    },
+    "avg_detection_delay": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "total_fp": {
+      "mean": 12.2,
+      "std": 1.6432
+    },
+    "total_tp": {
+      "mean": 2.4,
+      "std": 1.1402
+    }
+  },
+  "daaw": {
+    "precision": {
+      "mean": 0.96,
+      "std": 0.0894
+    },
+    "recall": {
+      "mean": 1.0,
+      "std": 0.0
+    },
+    "f1": {
+      "mean": 0.9778,
+      "std": 0.0497
+    },
+    "avg_detection_delay": {
+      "mean": 1.2,
+      "std": 0.2092
+    },
+    "total_fp": {
+      "mean": 0.2,
+      "std": 0.4472
+    },
+    "total_tp": {
+      "mean": 4.0,
+      "std": 0.0
+    }
+  },
+  "paired_ttest_daaw_vs_cda_f1": {
+    "t_statistic": 32.9871,
+    "p_value": 0.0,
+    "significant_at_0.05": true,
+    "note": "Given n=5, a Wilcoxon signed-rank test cannot reach p<0.05 regardless of consistency (minimum attainable two-sided p is 0.0625), so a paired t-test is used instead, assuming approximately normal paired differences. Descriptive stats (mean/std, per-seed results) are reported regardless of significance so conclusions do not rest on this test alone."
+  }
+}

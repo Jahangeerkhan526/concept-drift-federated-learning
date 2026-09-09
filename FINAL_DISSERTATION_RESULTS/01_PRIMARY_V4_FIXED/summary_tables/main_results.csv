@@ -1,0 +1,16 @@
+scenario,method,precision_mean,recall_mean,f1_mean,f1_sd,false_alarms_mean,detection_delay_mean,accuracy_mean
+har_label_shuffle,CDA-FedAvg,0.2489,1.0,0.3981,0.0315,12.2,0.0,0.7767
+har_label_shuffle,DAAW,0.96,1.0,0.9778,0.0497,0.2,1.2,0.7752
+har_label_shuffle,FedAvg,,,,,,,0.78
+har_activity_drift,CDA-FedAvg,0.2482,1.0,0.3974,0.0252,12.2,6.0,0.9732
+har_activity_drift,DAAW,0.0,0.0,0.0,0.0,0.4,,0.9713
+har_activity_drift,FedAvg,,,,,,,0.9711
+gas_label_shuffle,CDA-FedAvg,0.2513,1.0,0.4013,0.0259,12.0,0.0,0.7831
+gas_label_shuffle,DAAW,1.0,1.0,1.0,0.0,0.0,1.6,0.7816
+gas_label_shuffle,FedAvg,,,,,,,0.7823
+gas_sudden_batch,CDA-FedAvg,0.2646,0.95,0.4122,0.0537,10.8,0.0,0.9425
+gas_sudden_batch,DAAW,0.9333,0.45,0.579,0.1931,0.2,3.4,0.9336
+gas_sudden_batch,FedAvg,,,,,,,0.9358
+gas_sequential_batch,CDA-FedAvg,1.0,1.0,1.0,0.0,0.0,8.52,0.8467
+gas_sequential_batch,DAAW,0.8,0.14,0.2363,0.1475,0.0,16.12,0.8469
+gas_sequential_batch,FedAvg,,,,,,,0.8475

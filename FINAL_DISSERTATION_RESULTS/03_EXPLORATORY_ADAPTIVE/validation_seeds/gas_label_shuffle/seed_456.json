@@ -1,0 +1,41 @@
+{
+  "fedavg_acc": 0.7925819229384228,
+  "fedavg_loss": 0.8207037488505048,
+  "cda_acc": 0.7904213179690314,
+  "cda_loss": 0.8142264208634336,
+  "daaw_fixed_acc": 0.7915016204537271,
+  "daaw_fixed_loss": 0.837055794181292,
+  "daaw_adaptive_acc": 0.7889809146561038,
+  "daaw_adaptive_loss": 0.8454862219532625,
+  "cda": {
+    "precision": 0.2222,
+    "recall": 1.0,
+    "f1": 0.3636,
+    "avg_detection_delay": 0.0,
+    "total_tp": 0,
+    "total_fp": 14,
+    "detected_events": 4,
+    "total_events": 4
+  },
+  "daaw_fixed": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "avg_detection_delay": 0.75,
+    "total_tp": 4,
+    "total_fp": 0,
+    "detected_events": 4,
+    "total_events": 4
+  },
+  "daaw_adaptive": {
+    "precision": 0.3333,
+    "recall": 1.0,
+    "f1": 0.5,
+    "avg_detection_delay": 0.5,
+    "total_tp": 2,
+    "total_fp": 8,
+    "detected_events": 4,
+    "total_events": 4
+  },
+  "seed": 456
+}

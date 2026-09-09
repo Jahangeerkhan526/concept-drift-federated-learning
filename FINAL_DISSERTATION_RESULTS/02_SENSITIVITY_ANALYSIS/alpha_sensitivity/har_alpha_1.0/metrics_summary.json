@@ -1,0 +1,33 @@
+{
+  "title": "alpha=1.0",
+  "cda": {
+    "precision": 0.0714,
+    "recall": 1.0,
+    "f1": 0.1333,
+    "avg_detection_delay": 0.0,
+    "total_tp": 1,
+    "total_fp": 13,
+    "detected_events": 4,
+    "total_events": 4
+  },
+  "daaw": {
+    "precision": 0.5714,
+    "recall": 1.0,
+    "f1": 0.7273,
+    "avg_detection_delay": 1.25,
+    "total_tp": 4,
+    "total_fp": 3,
+    "detected_events": 4,
+    "total_events": 4
+  },
+  "computational_time_seconds": {
+    "fedavg": 88.59,
+    "cda": 85.62,
+    "daaw": 66.8
+  },
+  "final_accuracy": {
+    "fedavg": 0.7331,
+    "cda": 0.7326,
+    "daaw": 0.736
+  }
+}

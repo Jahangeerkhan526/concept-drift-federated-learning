@@ -1,0 +1,233 @@
+{
+  "scenario": "gas_sudden_batch",
+  "seeds": [
+    123,
+    456,
+    789,
+    999
+  ],
+  "fedavg_accuracy": {
+    "mean": 0.9294915559122187,
+    "std": 0.0032741253643164265
+  },
+  "fedavg_loss": {
+    "mean": 0.35035746500880094,
+    "std": 0.019866719468094953
+  },
+  "cda_accuracy": {
+    "mean": 0.939938693911534,
+    "std": 0.004180976731229645
+  },
+  "cda_loss": {
+    "mean": 0.34834599553986684,
+    "std": 0.04282352059057542
+  },
+  "daaw_fixed_accuracy": {
+    "mean": 0.9300595489275828,
+    "std": 0.006260865900168348
+  },
+  "daaw_fixed_loss": {
+    "mean": 0.3565636596646903,
+    "std": 0.01934020184090073
+  },
+  "daaw_adaptive_accuracy": {
+    "mean": 0.926699521213309,
+    "std": 0.004232995340081699
+  },
+  "daaw_adaptive_loss": {
+    "mean": 0.3739193852374341,
+    "std": 0.01800120924692866
+  },
+  "cda_precision": {
+    "mean": 0.272025,
+    "std": 0.017199491271546383,
+    "raw": [
+      0.25,
+      0.2857,
+      0.2667,
+      0.2857
+    ]
+  },
+  "cda_recall": {
+    "mean": 1.0,
+    "std": 0.0,
+    "raw": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "cda_f1": {
+    "mean": 0.42747500000000005,
+    "std": 0.02135749283038625,
+    "raw": [
+      0.4,
+      0.4444,
+      0.4211,
+      0.4444
+    ]
+  },
+  "cda_avg_detection_delay": {
+    "mean": 0.0,
+    "std": 0.0,
+    "raw": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "cda_total_fp": {
+    "mean": 10.75,
+    "std": 0.9574271077563381,
+    "raw": [
+      12,
+      10,
+      11,
+      10
+    ]
+  },
+  "cda_detected_events": {
+    "mean": 4.0,
+    "std": 0.0,
+    "raw": [
+      4,
+      4,
+      4,
+      4
+    ]
+  },
+  "daaw_fixed_precision": {
+    "mean": 1.0,
+    "std": 0.0,
+    "raw": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "daaw_fixed_recall": {
+    "mean": 0.4375,
+    "std": 0.23935677693908453,
+    "raw": [
+      0.75,
+      0.5,
+      0.25,
+      0.25
+    ]
+  },
+  "daaw_fixed_f1": {
+    "mean": 0.58095,
+    "std": 0.22293324112837004,
+    "raw": [
+      0.8571,
+      0.6667,
+      0.4,
+      0.4
+    ]
+  },
+  "daaw_fixed_avg_detection_delay": {
+    "mean": 1.75,
+    "std": 0.5,
+    "raw": [
+      2.0,
+      2.0,
+      1.0,
+      2.0
+    ]
+  },
+  "daaw_fixed_total_fp": {
+    "mean": 0.0,
+    "std": 0.0,
+    "raw": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "daaw_fixed_detected_events": {
+    "mean": 1.75,
+    "std": 0.9574271077563381,
+    "raw": [
+      3,
+      2,
+      1,
+      1
+    ]
+  },
+  "daaw_adaptive_precision": {
+    "mean": 0.4611,
+    "std": 0.04843731344050093,
+    "raw": [
+      0.5,
+      0.4444,
+      0.4,
+      0.5
+    ]
+  },
+  "daaw_adaptive_recall": {
+    "mean": 1.0,
+    "std": 0.0,
+    "raw": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "daaw_adaptive_f1": {
+    "mean": 0.63005,
+    "std": 0.04597423191310539,
+    "raw": [
+      0.6667,
+      0.6154,
+      0.5714,
+      0.6667
+    ]
+  },
+  "daaw_adaptive_avg_detection_delay": {
+    "mean": 1.1875,
+    "std": 0.375,
+    "raw": [
+      1.5,
+      0.75,
+      1.0,
+      1.5
+    ]
+  },
+  "daaw_adaptive_total_fp": {
+    "mean": 4.75,
+    "std": 0.9574271077563381,
+    "raw": [
+      4,
+      5,
+      6,
+      4
+    ]
+  },
+  "daaw_adaptive_detected_events": {
+    "mean": 4.0,
+    "std": 0.0,
+    "raw": [
+      4,
+      4,
+      4,
+      4
+    ]
+  },
+  "paired_ttest_adaptive_vs_fixed_f1": {
+    "t_stat": 0.47219641207790286,
+    "p_value": 0.6690105269251608
+  },
+  "paired_ttest_adaptive_vs_cda_f1": {
+    "t_stat": 7.734937898407234,
+    "p_value": 0.004493312222902717
+  },
+  "paired_ttest_fixed_vs_cda_f1": {
+    "t_stat": 1.3027112579243076,
+    "p_value": 0.28365324624794896
+  }
+}

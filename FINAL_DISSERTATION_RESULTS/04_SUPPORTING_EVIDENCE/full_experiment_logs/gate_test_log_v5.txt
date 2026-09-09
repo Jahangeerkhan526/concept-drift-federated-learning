@@ -1,0 +1,1533 @@
+============================================================
+HAR Activity Drift (V3)
+============================================================
+Loading UCI HAR from cache...
+Dataset ready: 10299 samples, 561 features, 6 classes
+
+==================================================
+BASELINE 1: FedAvg
+Rounds: 50 | Clients: 10 | Alpha: shared partition | Drift: activity
+==================================================
+  Round 1 accuracy: 0.7726 | loss: 1.1148
+  Round 2 accuracy: 0.7600 | loss: 0.8200
+  Round 3 accuracy: 0.8457 | loss: 0.6356
+  Round 4 accuracy: 0.8905 | loss: 0.5142
+  *** DRIFT INJECTED into Client 3 ***
+  Round 5 accuracy: 0.8867 | loss: 0.4179
+  Round 6 accuracy: 0.9048 | loss: 0.3686
+  Round 7 accuracy: 0.9139 | loss: 0.3259
+  Round 8 accuracy: 0.9204 | loss: 0.3037
+  Round 9 accuracy: 0.9250 | loss: 0.2837
+  Round 10 accuracy: 0.9179 | loss: 0.2765
+  Round 11 accuracy: 0.9225 | loss: 0.2479
+  Round 12 accuracy: 0.9209 | loss: 0.2343
+  Round 13 accuracy: 0.9315 | loss: 0.2157
+  Round 14 accuracy: 0.9376 | loss: 0.2212
+  Round 15 accuracy: 0.9426 | loss: 0.1976
+  Round 16 accuracy: 0.9456 | loss: 0.2035
+  Round 17 accuracy: 0.9451 | loss: 0.2000
+  Round 18 accuracy: 0.9481 | loss: 0.1863
+  Round 19 accuracy: 0.9507 | loss: 0.1770
+  *** DRIFT INJECTED into Client 5 ***
+  Round 20 accuracy: 0.9489 | loss: 0.1716
+  Round 21 accuracy: 0.9569 | loss: 0.1670
+  Round 22 accuracy: 0.9505 | loss: 0.1616
+  Round 23 accuracy: 0.9596 | loss: 0.1520
+  Round 24 accuracy: 0.9623 | loss: 0.1390
+  Round 25 accuracy: 0.9618 | loss: 0.1439
+  Round 26 accuracy: 0.9569 | loss: 0.1386
+  Round 27 accuracy: 0.9612 | loss: 0.1432
+  Round 28 accuracy: 0.9607 | loss: 0.1359
+  Round 29 accuracy: 0.9645 | loss: 0.1422
+  Round 30 accuracy: 0.9569 | loss: 0.1249
+  Round 31 accuracy: 0.9629 | loss: 0.1324
+  Round 32 accuracy: 0.9672 | loss: 0.1338
+  Round 33 accuracy: 0.9596 | loss: 0.1259
+  Round 34 accuracy: 0.9607 | loss: 0.1245
+  *** DRIFT INJECTED into Client 7 ***
+  Round 35 accuracy: 0.9615 | loss: 0.1231
+  Round 36 accuracy: 0.9664 | loss: 0.1216
+  Round 37 accuracy: 0.9686 | loss: 0.1127
+  Round 38 accuracy: 0.9648 | loss: 0.1130
+  Round 39 accuracy: 0.9707 | loss: 0.1094
+  Round 40 accuracy: 0.9659 | loss: 0.1075
+  Round 41 accuracy: 0.9707 | loss: 0.1068
+  Round 42 accuracy: 0.9745 | loss: 0.1140
+  Round 43 accuracy: 0.9729 | loss: 0.1070
+  Round 44 accuracy: 0.9713 | loss: 0.1061
+  *** DRIFT INJECTED into Client 9 ***
+  Round 45 accuracy: 0.9689 | loss: 0.1018
+  Round 46 accuracy: 0.9661 | loss: 0.1047
+  Round 47 accuracy: 0.9712 | loss: 0.1215
+  Round 48 accuracy: 0.9684 | loss: 0.0947
+  Round 49 accuracy: 0.9712 | loss: 0.1087
+  Round 50 accuracy: 0.9706 | loss: 0.1008
+
+FedAvg complete! Time: 38.44s
+
+==================================================
+BASELINE 2: CDA-FedAvg
+Rounds: 50 | Clients: 10 | Threshold: 0.15 | Drift: activity
+==================================================
+
+Drift events: {3: 5, 5: 20, 7: 35, 9: 45}
+
+--- Round 1 ---
+  Round 1 accuracy: 0.7726
+
+--- Round 2 ---
+  Round 2 accuracy: 0.7600
+
+--- Round 3 ---
+  Round 3 accuracy: 0.8457
+
+--- Round 4 ---
+  Round 4 accuracy: 0.8905
+
+--- Round 5 ---
+  *** DRIFT INJECTED into Client 3 ***
+  Round 5 accuracy: 0.8867
+
+--- Round 6 ---
+  Round 6 accuracy: 0.9048
+
+--- Round 7 ---
+  Round 7 accuracy: 0.9139
+
+--- Round 8 ---
+  Round 8 accuracy: 0.9204
+
+--- Round 9 ---
+  Round 9 accuracy: 0.9250
+
+--- Round 10 ---
+  Round 10 accuracy: 0.9179
+
+--- Round 11 ---
+  Round 11 accuracy: 0.9225
+
+--- Round 12 ---
+  Client 7: DRIFT DETECTED (loss change: 0.315) → weight reduced to 0.3
+  Round 12 accuracy: 0.9209
+
+--- Round 13 ---
+  Round 13 accuracy: 0.9320
+
+--- Round 14 ---
+  Client 5: DRIFT DETECTED (loss change: 0.159) → weight reduced to 0.3
+  Round 14 accuracy: 0.9366
+
+--- Round 15 ---
+  Round 15 accuracy: 0.9406
+
+--- Round 16 ---
+  Client 1: DRIFT DETECTED (loss change: 0.254) → weight reduced to 0.3
+  Round 16 accuracy: 0.9456
+
+--- Round 17 ---
+  Client 8: DRIFT DETECTED (loss change: 0.452) → weight reduced to 0.3
+  Round 17 accuracy: 0.9431
+
+--- Round 18 ---
+  Round 18 accuracy: 0.9446
+
+--- Round 19 ---
+  Round 19 accuracy: 0.9502
+
+--- Round 20 ---
+  *** DRIFT INJECTED into Client 5 ***
+  Client 3: DRIFT DETECTED (loss change: 0.216) → weight reduced to 0.3
+  Round 20 accuracy: 0.9532
+
+--- Round 21 ---
+  Client 5: DRIFT DETECTED (loss change: 0.236) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.252) → weight reduced to 0.3
+  Round 21 accuracy: 0.9553
+
+--- Round 22 ---
+  Client 1: DRIFT DETECTED (loss change: 0.158) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 0.277) → weight reduced to 0.3
+  Round 22 accuracy: 0.9553
+
+--- Round 23 ---
+  Client 7: DRIFT DETECTED (loss change: 0.354) → weight reduced to 0.3
+  Round 23 accuracy: 0.9607
+
+--- Round 24 ---
+  Round 24 accuracy: 0.9623
+
+--- Round 25 ---
+  Client 3: DRIFT DETECTED (loss change: 0.350) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 0.194) → weight reduced to 0.3
+  Round 25 accuracy: 0.9607
+
+--- Round 26 ---
+  Client 0: DRIFT DETECTED (loss change: 0.178) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 0.182) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.630) → weight reduced to 0.3
+  Round 26 accuracy: 0.9586
+
+--- Round 27 ---
+  Client 6: DRIFT DETECTED (loss change: 0.153) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 0.722) → weight reduced to 0.3
+  Round 27 accuracy: 0.9639
+
+--- Round 28 ---
+  Client 1: DRIFT DETECTED (loss change: 0.265) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 0.221) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.204) → weight reduced to 0.3
+  Round 28 accuracy: 0.9639
+
+--- Round 29 ---
+  Client 2: DRIFT DETECTED (loss change: 0.349) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 0.243) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 0.282) → weight reduced to 0.3
+  Round 29 accuracy: 0.9650
+
+--- Round 30 ---
+  Client 8: DRIFT DETECTED (loss change: 0.198) → weight reduced to 0.3
+  Round 30 accuracy: 0.9569
+
+--- Round 31 ---
+  Client 5: DRIFT DETECTED (loss change: 0.341) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 0.821) → weight reduced to 0.3
+  Round 31 accuracy: 0.9634
+
+--- Round 32 ---
+  Client 4: DRIFT DETECTED (loss change: 0.212) → weight reduced to 0.3
+  Round 32 accuracy: 0.9693
+
+--- Round 33 ---
+  Client 3: DRIFT DETECTED (loss change: 0.155) → weight reduced to 0.3
+  Round 33 accuracy: 0.9650
+
+--- Round 34 ---
+  Client 7: DRIFT DETECTED (loss change: 0.673) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 0.152) → weight reduced to 0.3
+  Round 34 accuracy: 0.9629
+
+--- Round 35 ---
+  *** DRIFT INJECTED into Client 7 ***
+  Client 4: DRIFT DETECTED (loss change: 0.311) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 0.221) → weight reduced to 0.3
+  Round 35 accuracy: 0.9599
+
+--- Round 36 ---
+  Client 1: DRIFT DETECTED (loss change: 0.199) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 0.574) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 0.156) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 0.401) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.995) → weight reduced to 0.3
+  Round 36 accuracy: 0.9626
+
+--- Round 37 ---
+  Client 4: DRIFT DETECTED (loss change: 0.255) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 0.276) → weight reduced to 0.3
+  Round 37 accuracy: 0.9675
+
+--- Round 38 ---
+  Client 2: DRIFT DETECTED (loss change: 0.386) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 0.259) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 1.687) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.317) → weight reduced to 0.3
+  Round 38 accuracy: 0.9680
+
+--- Round 39 ---
+  Client 1: DRIFT DETECTED (loss change: 0.169) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.810) → weight reduced to 0.3
+  Round 39 accuracy: 0.9697
+
+--- Round 40 ---
+  Client 1: DRIFT DETECTED (loss change: 0.189) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 0.279) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 0.464) → weight reduced to 0.3
+  Round 40 accuracy: 0.9686
+
+--- Round 41 ---
+  Client 0: DRIFT DETECTED (loss change: 0.227) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 0.177) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 0.392) → weight reduced to 0.3
+  Round 41 accuracy: 0.9735
+
+--- Round 42 ---
+  Client 0: DRIFT DETECTED (loss change: 0.226) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 0.167) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 0.210) → weight reduced to 0.3
+  Round 42 accuracy: 0.9735
+
+--- Round 43 ---
+  Client 3: DRIFT DETECTED (loss change: 0.343) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 0.227) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.952) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 0.208) → weight reduced to 0.3
+  Round 43 accuracy: 0.9691
+
+--- Round 44 ---
+  Client 2: DRIFT DETECTED (loss change: 0.225) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 0.567) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 1.526) → weight reduced to 0.3
+  Round 44 accuracy: 0.9718
+
+--- Round 45 ---
+  *** DRIFT INJECTED into Client 9 ***
+  Client 4: DRIFT DETECTED (loss change: 0.593) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 0.542) → weight reduced to 0.3
+  Round 45 accuracy: 0.9701
+
+--- Round 46 ---
+  Client 1: DRIFT DETECTED (loss change: 0.170) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 0.280) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 4.596) → weight reduced to 0.3
+  Round 46 accuracy: 0.9689
+
+--- Round 47 ---
+  Client 0: DRIFT DETECTED (loss change: 0.169) → weight reduced to 0.3
+  Client 1: DRIFT DETECTED (loss change: 0.319) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 0.405) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 0.169) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 0.217) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 0.360) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.663) → weight reduced to 0.3
+  Round 47 accuracy: 0.9695
+
+--- Round 48 ---
+  Client 7: DRIFT DETECTED (loss change: 0.420) → weight reduced to 0.3
+  Round 48 accuracy: 0.9678
+
+--- Round 49 ---
+  Client 2: DRIFT DETECTED (loss change: 0.242) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 0.256) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 0.375) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.157) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 1.104) → weight reduced to 0.3
+  Round 49 accuracy: 0.9740
+
+--- Round 50 ---
+  Client 1: DRIFT DETECTED (loss change: 0.382) → weight reduced to 0.3
+  Round 50 accuracy: 0.9706
+
+CDA drift detection summary:
+  Client 3: drift detected at round 20
+  Client 5: drift detected at round 21
+  Client 7: drift detected at round 36
+  Client 9: drift detected at round 49
+
+CDA-FedAvg complete! Time: 33.03s | Detection-only time: 1.96ms
+
+==================================================
+PROPOSED METHOD: DAAW
+Rounds: 50 | Clients: 10 | Drift: activity
+Short window: 5 | Long window: 20 | Threshold: 0.3
+==================================================
+
+Drift events: {3: 5, 5: 20, 7: 35, 9: 45}
+
+--- Round 1 ---
+  Round 1 accuracy: 0.7726
+
+--- Round 2 ---
+  Round 2 accuracy: 0.7600
+
+--- Round 3 ---
+  Round 3 accuracy: 0.8457
+
+--- Round 4 ---
+  Round 4 accuracy: 0.8905
+
+--- Round 5 ---
+  *** SUDDEN DRIFT INJECTED into Client 3 ***
+  Round 5 accuracy: 0.8867
+
+--- Round 6 ---
+  Client 9: DRIFT DETECTED (similarity: 0.2414) → EXCLUDED (weight 0.3)
+  Round 6 accuracy: 0.9048
+
+--- Round 7 ---
+  Round 7 accuracy: 0.9134
+
+--- Round 8 ---
+  Round 8 accuracy: 0.9215
+
+--- Round 9 ---
+  Round 9 accuracy: 0.9220
+
+--- Round 10 ---
+  Round 10 accuracy: 0.9179
+
+--- Round 11 ---
+  Round 11 accuracy: 0.9220
+
+--- Round 12 ---
+  Round 12 accuracy: 0.9209
+
+--- Round 13 ---
+  Round 13 accuracy: 0.9381
+
+--- Round 14 ---
+  Client 9: stabilised → weight restored to 1.0
+  Round 14 accuracy: 0.9406
+
+--- Round 15 ---
+  Round 15 accuracy: 0.9421
+
+--- Round 16 ---
+  Round 16 accuracy: 0.9446
+
+--- Round 17 ---
+  Round 17 accuracy: 0.9436
+
+--- Round 18 ---
+  Round 18 accuracy: 0.9466
+
+--- Round 19 ---
+  Round 19 accuracy: 0.9507
+
+--- Round 20 ---
+  *** SUDDEN DRIFT INJECTED into Client 5 ***
+  Round 20 accuracy: 0.9510
+
+--- Round 21 ---
+  Round 21 accuracy: 0.9569
+
+--- Round 22 ---
+  Round 22 accuracy: 0.9537
+
+--- Round 23 ---
+  Round 23 accuracy: 0.9596
+
+--- Round 24 ---
+  Round 24 accuracy: 0.9629
+
+--- Round 25 ---
+  Round 25 accuracy: 0.9623
+
+--- Round 26 ---
+  Round 26 accuracy: 0.9569
+
+--- Round 27 ---
+  Round 27 accuracy: 0.9623
+
+--- Round 28 ---
+  Round 28 accuracy: 0.9612
+
+--- Round 29 ---
+  Round 29 accuracy: 0.9634
+
+--- Round 30 ---
+  Round 30 accuracy: 0.9596
+
+--- Round 31 ---
+  Round 31 accuracy: 0.9618
+
+--- Round 32 ---
+  Round 32 accuracy: 0.9650
+
+--- Round 33 ---
+  Round 33 accuracy: 0.9602
+
+--- Round 34 ---
+  Round 34 accuracy: 0.9602
+
+--- Round 35 ---
+  *** SUDDEN DRIFT INJECTED into Client 7 ***
+  Round 35 accuracy: 0.9615
+
+--- Round 36 ---
+  Round 36 accuracy: 0.9680
+
+--- Round 37 ---
+  Round 37 accuracy: 0.9675
+
+--- Round 38 ---
+  Round 38 accuracy: 0.9680
+
+--- Round 39 ---
+  Round 39 accuracy: 0.9724
+
+--- Round 40 ---
+  Round 40 accuracy: 0.9691
+
+--- Round 41 ---
+  Round 41 accuracy: 0.9691
+
+--- Round 42 ---
+  Round 42 accuracy: 0.9691
+
+--- Round 43 ---
+  Round 43 accuracy: 0.9648
+
+--- Round 44 ---
+  Round 44 accuracy: 0.9713
+
+--- Round 45 ---
+  *** SUDDEN DRIFT INJECTED into Client 9 ***
+  Round 45 accuracy: 0.9684
+
+--- Round 46 ---
+  Round 46 accuracy: 0.9678
+
+--- Round 47 ---
+  Round 47 accuracy: 0.9718
+
+--- Round 48 ---
+  Round 48 accuracy: 0.9684
+
+--- Round 49 ---
+  Round 49 accuracy: 0.9718
+
+--- Round 50 ---
+  Round 50 accuracy: 0.9729
+
+Drift detection summary:
+  Client 3: drift NOT detected (missed!)
+  Client 5: drift NOT detected (missed!)
+  Client 7: drift NOT detected (missed!)
+  Client 9: drift NOT detected (missed!)
+
+DAAW complete! Time: 38.01s | Detection-only time: 1881.45ms
+============================================================
+Gas Sudden Batch (V3)
+============================================================
+Loading Gas Sensor dataset with batch info from cache (v3, reference-fit scaler)...
+Dataset ready: 13910 samples, 128 features, 6 classes
+
+==================================================
+GAS SENSOR , BASELINE 1: FedAvg
+Rounds: 50 | Clients: 10 | Alpha: shared partition | Drift: batch
+==================================================
+Gas Sudden Batch pools: early_total=3275, late_total=4364, target_floor(train)=20, clients_below_floor=none
+  Round 1 accuracy: 0.7220 | loss: 1.6244
+  Round 2 accuracy: 0.8249 | loss: 1.2121
+  Round 3 accuracy: 0.8141 | loss: 0.8767
+  Round 4 accuracy: 0.8356 | loss: 0.6879
+  Round 5 accuracy: 0.8074 | loss: 0.7058
+  Round 6 accuracy: 0.8370 | loss: 0.6121
+  Round 7 accuracy: 0.8430 | loss: 0.5610
+  Round 8 accuracy: 0.8563 | loss: 0.4988
+  Round 9 accuracy: 0.8830 | loss: 0.4671
+  Round 10 accuracy: 0.9007 | loss: 0.4384
+  Round 11 accuracy: 0.8874 | loss: 0.4068
+  Round 12 accuracy: 0.8978 | loss: 0.3762
+  Round 13 accuracy: 0.9230 | loss: 0.3639
+  Round 14 accuracy: 0.9096 | loss: 0.3518
+  Round 15 accuracy: 0.9111 | loss: 0.3219
+  Round 16 accuracy: 0.9230 | loss: 0.3214
+  Round 17 accuracy: 0.9244 | loss: 0.3036
+  Round 18 accuracy: 0.9096 | loss: 0.3166
+  Round 19 accuracy: 0.9274 | loss: 0.3082
+  Round 20 accuracy: 0.9028 | loss: 0.3084
+  Round 21 accuracy: 0.8999 | loss: 0.2889
+  Round 22 accuracy: 0.9057 | loss: 0.2974
+  Round 23 accuracy: 0.9043 | loss: 0.2832
+  Round 24 accuracy: 0.8969 | loss: 0.3016
+  Round 25 accuracy: 0.9028 | loss: 0.3003
+  Round 26 accuracy: 0.9116 | loss: 0.2855
+  Round 27 accuracy: 0.9131 | loss: 0.2787
+  Round 28 accuracy: 0.9072 | loss: 0.2735
+  Round 29 accuracy: 0.9131 | loss: 0.2865
+  Round 30 accuracy: 0.9087 | loss: 0.2621
+  Round 31 accuracy: 0.9146 | loss: 0.2559
+  Round 32 accuracy: 0.9175 | loss: 0.2312
+  Round 33 accuracy: 0.9175 | loss: 0.2465
+  Round 34 accuracy: 0.9161 | loss: 0.2460
+  Round 35 accuracy: 0.8910 | loss: 0.3584
+  Round 36 accuracy: 0.8981 | loss: 0.3169
+  Round 37 accuracy: 0.8953 | loss: 0.3111
+  Round 38 accuracy: 0.8981 | loss: 0.3033
+  Round 39 accuracy: 0.9053 | loss: 0.2893
+  Round 40 accuracy: 0.9096 | loss: 0.3219
+  Round 41 accuracy: 0.9039 | loss: 0.2995
+  Round 42 accuracy: 0.9211 | loss: 0.2718
+  Round 43 accuracy: 0.9024 | loss: 0.3074
+  Round 44 accuracy: 0.9053 | loss: 0.2905
+  Round 45 accuracy: 0.8863 | loss: 0.3923
+  Round 46 accuracy: 0.8753 | loss: 0.3625
+  Round 47 accuracy: 0.8849 | loss: 0.3538
+  Round 48 accuracy: 0.9082 | loss: 0.3631
+  Round 49 accuracy: 0.9082 | loss: 0.3352
+  Round 50 accuracy: 0.9082 | loss: 0.3512
+
+FedAvg Gas complete! Time: 11.32s
+
+==================================================
+GAS SENSOR , BASELINE 2: CDA-FedAvg
+Rounds: 50 | Clients: 10 | Threshold: 0.15 | Drift: batch
+==================================================
+
+Drift events: {3: 5, 5: 20, 7: 35, 9: 45}
+Gas Sudden Batch pools: early_total=3275, late_total=4364, target_floor(train)=20, clients_below_floor=none
+
+--- Round 1 ---
+  Round 1 accuracy: 0.7220
+
+--- Round 2 ---
+  Round 2 accuracy: 0.8249
+
+--- Round 3 ---
+  Round 3 accuracy: 0.8141
+
+--- Round 4 ---
+  Round 4 accuracy: 0.8356
+
+--- Round 5 ---
+  Client 3: DRIFT DETECTED (loss change: 1.082) → weight reduced to 0.3
+  Round 5 accuracy: 0.8074
+
+--- Round 6 ---
+  Round 6 accuracy: 0.8370
+
+--- Round 7 ---
+  Round 7 accuracy: 0.8444
+
+--- Round 8 ---
+  Round 8 accuracy: 0.8593
+
+--- Round 9 ---
+  Round 9 accuracy: 0.8859
+
+--- Round 10 ---
+  Round 10 accuracy: 0.9037
+
+--- Round 11 ---
+  Round 11 accuracy: 0.8933
+
+--- Round 12 ---
+  Round 12 accuracy: 0.9022
+
+--- Round 13 ---
+  Round 13 accuracy: 0.9244
+
+--- Round 14 ---
+  Round 14 accuracy: 0.9067
+
+--- Round 15 ---
+  Round 15 accuracy: 0.9111
+
+--- Round 16 ---
+  Client 0: DRIFT DETECTED (loss change: 0.225) → weight reduced to 0.3
+  Round 16 accuracy: 0.9200
+
+--- Round 17 ---
+  Client 6: DRIFT DETECTED (loss change: 0.217) → weight reduced to 0.3
+  Round 17 accuracy: 0.9244
+
+--- Round 18 ---
+  Client 0: DRIFT DETECTED (loss change: 0.423) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 0.175) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 0.177) → weight reduced to 0.3
+  Round 18 accuracy: 0.9052
+
+--- Round 19 ---
+  Client 8: DRIFT DETECTED (loss change: 0.212) → weight reduced to 0.3
+  Round 19 accuracy: 0.9230
+
+--- Round 20 ---
+  Client 4: DRIFT DETECTED (loss change: 0.342) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 3.674) → weight reduced to 0.3
+  Round 20 accuracy: 0.9043
+
+--- Round 21 ---
+  Round 21 accuracy: 0.8999
+
+--- Round 22 ---
+  Client 0: DRIFT DETECTED (loss change: 0.352) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 0.406) → weight reduced to 0.3
+  Round 22 accuracy: 0.9087
+
+--- Round 23 ---
+  Client 1: DRIFT DETECTED (loss change: 0.254) → weight reduced to 0.3
+  Round 23 accuracy: 0.9102
+
+--- Round 24 ---
+  Client 0: DRIFT DETECTED (loss change: 0.341) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 0.380) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.281) → weight reduced to 0.3
+  Round 24 accuracy: 0.8925
+
+--- Round 25 ---
+  Client 6: DRIFT DETECTED (loss change: 0.217) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 0.649) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.248) → weight reduced to 0.3
+  Round 25 accuracy: 0.9057
+
+--- Round 26 ---
+  Client 4: DRIFT DETECTED (loss change: 0.368) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 0.567) → weight reduced to 0.3
+  Round 26 accuracy: 0.9161
+
+--- Round 27 ---
+  Client 0: DRIFT DETECTED (loss change: 0.180) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 0.232) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 0.202) → weight reduced to 0.3
+  Round 27 accuracy: 0.9161
+
+--- Round 28 ---
+  Client 8: DRIFT DETECTED (loss change: 0.150) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 0.456) → weight reduced to 0.3
+  Round 28 accuracy: 0.9116
+
+--- Round 29 ---
+  Client 0: DRIFT DETECTED (loss change: 0.394) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 0.230) → weight reduced to 0.3
+  Round 29 accuracy: 0.9161
+
+--- Round 30 ---
+  Client 7: DRIFT DETECTED (loss change: 0.628) → weight reduced to 0.3
+  Round 30 accuracy: 0.9131
+
+--- Round 31 ---
+  Client 6: DRIFT DETECTED (loss change: 1.253) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.463) → weight reduced to 0.3
+  Round 31 accuracy: 0.9190
+
+--- Round 32 ---
+  Client 9: DRIFT DETECTED (loss change: 0.216) → weight reduced to 0.3
+  Round 32 accuracy: 0.9205
+
+--- Round 33 ---
+  Client 2: DRIFT DETECTED (loss change: 0.208) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 1.070) → weight reduced to 0.3
+  Round 33 accuracy: 0.9190
+
+--- Round 34 ---
+  Client 0: DRIFT DETECTED (loss change: 0.323) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 0.390) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 1.166) → weight reduced to 0.3
+  Round 34 accuracy: 0.9264
+
+--- Round 35 ---
+  Client 0: DRIFT DETECTED (loss change: 0.261) → weight reduced to 0.3
+  Client 1: DRIFT DETECTED (loss change: 0.957) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 0.303) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 0.483) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 7.514) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.343) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 0.538) → weight reduced to 0.3
+  Round 35 accuracy: 0.8996
+
+--- Round 36 ---
+  Client 0: DRIFT DETECTED (loss change: 0.399) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 0.643) → weight reduced to 0.3
+  Round 36 accuracy: 0.9082
+
+--- Round 37 ---
+  Client 2: DRIFT DETECTED (loss change: 0.165) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 0.321) → weight reduced to 0.3
+  Round 37 accuracy: 0.9053
+
+--- Round 38 ---
+  Client 1: DRIFT DETECTED (loss change: 0.193) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 0.222) → weight reduced to 0.3
+  Round 38 accuracy: 0.9168
+
+--- Round 39 ---
+  Client 8: DRIFT DETECTED (loss change: 0.222) → weight reduced to 0.3
+  Round 39 accuracy: 0.9211
+
+--- Round 40 ---
+  Client 0: DRIFT DETECTED (loss change: 0.947) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.528) → weight reduced to 0.3
+  Round 40 accuracy: 0.9254
+
+--- Round 41 ---
+  Client 1: DRIFT DETECTED (loss change: 0.634) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 0.331) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 0.275) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 1.161) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 0.157) → weight reduced to 0.3
+  Round 41 accuracy: 0.9082
+
+--- Round 42 ---
+  Client 8: DRIFT DETECTED (loss change: 0.219) → weight reduced to 0.3
+  Round 42 accuracy: 0.9197
+
+--- Round 43 ---
+  Client 0: DRIFT DETECTED (loss change: 0.346) → weight reduced to 0.3
+  Client 1: DRIFT DETECTED (loss change: 0.186) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 0.156) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 0.937) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.225) → weight reduced to 0.3
+  Round 43 accuracy: 0.9168
+
+--- Round 44 ---
+  Client 6: DRIFT DETECTED (loss change: 1.013) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.231) → weight reduced to 0.3
+  Round 44 accuracy: 0.9154
+
+--- Round 45 ---
+  Client 4: DRIFT DETECTED (loss change: 0.604) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 11.745) → weight reduced to 0.3
+  Round 45 accuracy: 0.9041
+
+--- Round 46 ---
+  Round 46 accuracy: 0.8918
+
+--- Round 47 ---
+  Client 1: DRIFT DETECTED (loss change: 0.220) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 0.782) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 1.415) → weight reduced to 0.3
+  Round 47 accuracy: 0.9014
+
+--- Round 48 ---
+  Client 0: DRIFT DETECTED (loss change: 0.927) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 0.285) → weight reduced to 0.3
+  Round 48 accuracy: 0.9123
+
+--- Round 49 ---
+  Client 4: DRIFT DETECTED (loss change: 0.322) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.719) → weight reduced to 0.3
+  Round 49 accuracy: 0.9274
+
+--- Round 50 ---
+  Client 6: DRIFT DETECTED (loss change: 0.199) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 0.176) → weight reduced to 0.3
+  Round 50 accuracy: 0.9205
+
+CDA drift detection summary:
+  Client 3: drift detected at round 5
+  Client 5: drift detected at round 20
+  Client 7: drift detected at round 35
+  Client 9: drift detected at round 45
+
+CDA-FedAvg Gas complete! Time: 11.71s | Detection-only time: 1.00ms
+
+==================================================
+GAS SENSOR , PROPOSED METHOD: DAAW
+Rounds: 50 | Clients: 10 | Drift: batch
+Short window: 5 | Long window: 20 | Threshold: 0.3
+==================================================
+
+Drift events: {3: 5, 5: 20, 7: 35, 9: 45}
+Gas Sudden Batch pools: early_total=3275, late_total=4364, target_floor(train)=20, clients_below_floor=none
+
+--- Round 1 ---
+  Round 1 accuracy: 0.7220 | loss: 1.6244
+
+--- Round 2 ---
+  Round 2 accuracy: 0.8249 | loss: 1.2121
+
+--- Round 3 ---
+  Round 3 accuracy: 0.8141 | loss: 0.8767
+
+--- Round 4 ---
+  Round 4 accuracy: 0.8356 | loss: 0.6879
+
+--- Round 5 ---
+  Round 5 accuracy: 0.8074 | loss: 0.7058
+
+--- Round 6 ---
+  Client 5: DRIFT DETECTED (similarity: 0.2869) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (similarity: 0.2892) → weight reduced to 0.3
+  Round 6 accuracy: 0.8370 | loss: 0.6121
+
+--- Round 7 ---
+  Client 3: DRIFT DETECTED (similarity: 0.2758) → weight reduced to 0.3
+  Round 7 accuracy: 0.8430 | loss: 0.5594
+
+--- Round 8 ---
+  Round 8 accuracy: 0.8563 | loss: 0.4978
+
+--- Round 9 ---
+  Round 9 accuracy: 0.8844 | loss: 0.4681
+
+--- Round 10 ---
+  Round 10 accuracy: 0.9052 | loss: 0.4394
+
+--- Round 11 ---
+  Round 11 accuracy: 0.8948 | loss: 0.4081
+
+--- Round 12 ---
+  Round 12 accuracy: 0.9022 | loss: 0.3836
+
+--- Round 13 ---
+  Round 13 accuracy: 0.9215 | loss: 0.3741
+
+--- Round 14 ---
+  Client 5: stabilised → weight restored to 1.0
+  Client 8: stabilised → weight restored to 1.0
+  Round 14 accuracy: 0.9081 | loss: 0.3608
+
+--- Round 15 ---
+  Round 15 accuracy: 0.9156 | loss: 0.3334
+
+--- Round 16 ---
+  Round 16 accuracy: 0.9185 | loss: 0.3374
+
+--- Round 17 ---
+  Round 17 accuracy: 0.9244 | loss: 0.3177
+
+--- Round 18 ---
+  Round 18 accuracy: 0.9052 | loss: 0.3341
+
+--- Round 19 ---
+  Client 3: stabilised → weight restored to 1.0
+  Round 19 accuracy: 0.9200 | loss: 0.3262
+
+--- Round 20 ---
+  Round 20 accuracy: 0.9043 | loss: 0.3242
+
+--- Round 21 ---
+  Round 21 accuracy: 0.8969 | loss: 0.3061
+
+--- Round 22 ---
+  Client 5: DRIFT DETECTED (similarity: 0.0440) → weight reduced to 0.3
+  Round 22 accuracy: 0.9028 | loss: 0.3081
+
+--- Round 23 ---
+  Round 23 accuracy: 0.9043 | loss: 0.2949
+
+--- Round 24 ---
+  Round 24 accuracy: 0.8954 | loss: 0.3103
+
+--- Round 25 ---
+  Round 25 accuracy: 0.9028 | loss: 0.3134
+
+--- Round 26 ---
+  Round 26 accuracy: 0.9146 | loss: 0.2950
+
+--- Round 27 ---
+  Round 27 accuracy: 0.9161 | loss: 0.2877
+
+--- Round 28 ---
+  Round 28 accuracy: 0.9102 | loss: 0.2822
+
+--- Round 29 ---
+  Round 29 accuracy: 0.9116 | loss: 0.2946
+
+--- Round 30 ---
+  Round 30 accuracy: 0.9116 | loss: 0.2666
+
+--- Round 31 ---
+  Round 31 accuracy: 0.9102 | loss: 0.2616
+
+--- Round 32 ---
+  Round 32 accuracy: 0.9161 | loss: 0.2370
+
+--- Round 33 ---
+  Round 33 accuracy: 0.9116 | loss: 0.2523
+
+--- Round 34 ---
+  Round 34 accuracy: 0.9175 | loss: 0.2519
+
+--- Round 35 ---
+  Round 35 accuracy: 0.8852 | loss: 0.3691
+
+--- Round 36 ---
+  Client 7: DRIFT DETECTED (similarity: 0.0509) → weight reduced to 0.3
+  Round 36 accuracy: 0.8967 | loss: 0.3279
+
+--- Round 37 ---
+  Client 5: stabilised → weight restored to 1.0
+  Round 37 accuracy: 0.8924 | loss: 0.3227
+
+--- Round 38 ---
+  Round 38 accuracy: 0.8910 | loss: 0.3229
+
+--- Round 39 ---
+  Round 39 accuracy: 0.8967 | loss: 0.3098
+
+--- Round 40 ---
+  Round 40 accuracy: 0.8996 | loss: 0.3411
+
+--- Round 41 ---
+  Round 41 accuracy: 0.8996 | loss: 0.3187
+
+--- Round 42 ---
+  Round 42 accuracy: 0.9067 | loss: 0.2890
+
+--- Round 43 ---
+  Round 43 accuracy: 0.8967 | loss: 0.3263
+
+--- Round 44 ---
+  Round 44 accuracy: 0.8967 | loss: 0.3117
+
+--- Round 45 ---
+  Round 45 accuracy: 0.8685 | loss: 0.4240
+
+--- Round 46 ---
+  Client 9: DRIFT DETECTED (similarity: 0.2836) → weight reduced to 0.3
+  Round 46 accuracy: 0.8753 | loss: 0.3796
+
+--- Round 47 ---
+  Round 47 accuracy: 0.8767 | loss: 0.3824
+
+--- Round 48 ---
+  Round 48 accuracy: 0.8849 | loss: 0.3846
+
+--- Round 49 ---
+  Round 49 accuracy: 0.8904 | loss: 0.3622
+
+--- Round 50 ---
+  Round 50 accuracy: 0.8890 | loss: 0.3680
+
+Drift detection summary:
+  Client 3: drift detected at round 7
+  Client 5: drift detected at round 22
+  Client 7: drift detected at round 36
+  Client 9: drift detected at round 46
+
+DAAW Gas complete! Time: 11.80s | Detection-only time: 620.32ms
+============================================================
+Gas Sequential Batch (V3)
+============================================================
+Loading Gas Sensor dataset with batch info from cache (v3, reference-fit scaler)...
+Dataset ready: 13910 samples, 128 features, 6 classes
+
+==================================================
+GAS SENSOR , BASELINE 1: FedAvg
+Rounds: 50 | Clients: 10 | Alpha: shared partition | Drift: sequential
+==================================================
+Gas Sequential Batch pools: target_floor(train)=20, batches_with_clients_below_floor={4: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 5: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+
+--- Gas Sequential Batch: per-client / per-batch pool sizes (train/test) ---
+Client       Batch 1     Batch 2     Batch 3     Batch 4     Batch 5     Batch 6     Batch 7     Batch 8     Batch 9    Batch 10
+0               36/8      106/26      136/33        13/3        16/4      196/48      308/76        23/5        38/9      306/76
+1              59/14      189/47      242/60        13/3        16/4      352/87     552/137        30/7       64/16     549/137
+2              50/12      150/37      191/47        13/3        16/3      276/69     434/108        28/7       53/13     432/108
+3               37/9      109/27      139/34        13/3        16/4      201/50      316/79        24/5        39/9      315/78
+4               39/9      116/28      147/36        13/3        16/4      213/53      334/83        24/6       41/10      333/83
+5               20/5        20/5        24/6        14/3        16/4        36/8       56/13        20/5        20/5       56/13
+6               20/5       41/10       53/13        13/3        16/4       76/19      120/30        20/5        20/5      120/29
+7               28/7       82/20      104/26        13/3        16/4      151/37      236/59        20/5        30/7      236/59
+8               20/5        35/8       44/11        13/3        16/3       64/16      101/25        20/5        20/5      100/25
+9              50/12      151/37      192/48        13/3        16/3      279/69     437/109        28/7       53/13     436/109
+  Round 1 accuracy: 0.2674 | loss: 1.7753
+  Round 2 accuracy: 0.4651 | loss: 1.7245
+  Round 3 accuracy: 0.5116 | loss: 1.6835
+  Round 4 accuracy: 0.6628 | loss: 1.6247
+  Round 5 accuracy: 0.6860 | loss: 1.5762
+  Round 6 accuracy: 0.8449 | loss: 1.5489
+  Round 7 accuracy: 0.8531 | loss: 1.2975
+  Round 8 accuracy: 0.8531 | loss: 1.0418
+  Round 9 accuracy: 0.8490 | loss: 0.8075
+  Round 10 accuracy: 0.8694 | loss: 0.6521
+  Round 11 accuracy: 0.7866 | loss: 0.8090
+  Round 12 accuracy: 0.7866 | loss: 0.6276
+  Round 13 accuracy: 0.7898 | loss: 0.5148
+  Round 14 accuracy: 0.8153 | loss: 0.4468
+  Round 15 accuracy: 0.8535 | loss: 0.3813
+  Round 16 accuracy: 0.7000 | loss: 1.2298
+  Round 17 accuracy: 0.7667 | loss: 0.9795
+  Round 18 accuracy: 0.8667 | loss: 0.8510
+  Round 19 accuracy: 0.8667 | loss: 0.7512
+  Round 20 accuracy: 0.8667 | loss: 0.5924
+  Round 21 accuracy: 0.7027 | loss: 0.5882
+  Round 22 accuracy: 0.7027 | loss: 0.5983
+  Round 23 accuracy: 0.7027 | loss: 0.5732
+  Round 24 accuracy: 0.7027 | loss: 0.4584
+  Round 25 accuracy: 0.7027 | loss: 0.4770
+  Round 26 accuracy: 0.7478 | loss: 1.3906
+  Round 27 accuracy: 0.7807 | loss: 0.7944
+  Round 28 accuracy: 0.7851 | loss: 0.5966
+  Round 29 accuracy: 0.9079 | loss: 0.4709
+  Round 30 accuracy: 0.9276 | loss: 0.3833
+  Round 31 accuracy: 0.8178 | loss: 0.8356
+  Round 32 accuracy: 0.8581 | loss: 0.6318
+  Round 33 accuracy: 0.9054 | loss: 0.5344
+  Round 34 accuracy: 0.9152 | loss: 0.4678
+  Round 35 accuracy: 0.9221 | loss: 0.4316
+  Round 36 accuracy: 0.9123 | loss: 1.1664
+  Round 37 accuracy: 0.9123 | loss: 0.8173
+  Round 38 accuracy: 0.9123 | loss: 0.5979
+  Round 39 accuracy: 0.9298 | loss: 0.5883
+  Round 40 accuracy: 0.9123 | loss: 0.5913
+  Round 41 accuracy: 0.7500 | loss: 0.9855
+  Round 42 accuracy: 0.7717 | loss: 0.7949
+  Round 43 accuracy: 0.8152 | loss: 0.7016
+  Round 44 accuracy: 0.7935 | loss: 0.6521
+  Round 45 accuracy: 0.8696 | loss: 0.6440
+  Round 46 accuracy: 0.6890 | loss: 1.6879
+  Round 47 accuracy: 0.7755 | loss: 0.9994
+  Round 48 accuracy: 0.8187 | loss: 0.7053
+  Round 49 accuracy: 0.8257 | loss: 0.6073
+  Round 50 accuracy: 0.8298 | loss: 0.5725
+
+FedAvg Gas complete! Time: 5.16s
+
+==================================================
+GAS SENSOR , BASELINE 2: CDA-FedAvg
+Rounds: 50 | Clients: 10 | Threshold: 0.15 | Drift: sequential
+==================================================
+
+Drift events: {3: 5, 5: 20, 7: 35, 9: 45}
+Gas Sequential Batch pools: target_floor(train)=20, batches_with_clients_below_floor={4: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 5: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+
+--- Gas Sequential Batch: per-client / per-batch pool sizes (train/test) ---
+Client       Batch 1     Batch 2     Batch 3     Batch 4     Batch 5     Batch 6     Batch 7     Batch 8     Batch 9    Batch 10
+0               36/8      106/26      136/33        13/3        16/4      196/48      308/76        23/5        38/9      306/76
+1              59/14      189/47      242/60        13/3        16/4      352/87     552/137        30/7       64/16     549/137
+2              50/12      150/37      191/47        13/3        16/3      276/69     434/108        28/7       53/13     432/108
+3               37/9      109/27      139/34        13/3        16/4      201/50      316/79        24/5        39/9      315/78
+4               39/9      116/28      147/36        13/3        16/4      213/53      334/83        24/6       41/10      333/83
+5               20/5        20/5        24/6        14/3        16/4        36/8       56/13        20/5        20/5       56/13
+6               20/5       41/10       53/13        13/3        16/4       76/19      120/30        20/5        20/5      120/29
+7               28/7       82/20      104/26        13/3        16/4      151/37      236/59        20/5        30/7      236/59
+8               20/5        35/8       44/11        13/3        16/3       64/16      101/25        20/5        20/5      100/25
+9              50/12      151/37      192/48        13/3        16/3      279/69     437/109        28/7       53/13     436/109
+
+--- Round 1 ---
+  Round 1 accuracy: 0.2674
+
+--- Round 2 ---
+  Round 2 accuracy: 0.4651
+
+--- Round 3 ---
+  Round 3 accuracy: 0.5116
+
+--- Round 4 ---
+  Round 4 accuracy: 0.6628
+
+--- Round 5 ---
+  Round 5 accuracy: 0.6860
+
+--- Round 6 ---
+  Round 6 accuracy: 0.8449
+
+--- Round 7 ---
+  Round 7 accuracy: 0.8531
+
+--- Round 8 ---
+  Round 8 accuracy: 0.8531
+
+--- Round 9 ---
+  Round 9 accuracy: 0.8490
+
+--- Round 10 ---
+  Round 10 accuracy: 0.8694
+
+--- Round 11 ---
+  Client 0: DRIFT DETECTED (loss change: 0.195) → weight reduced to 0.3
+  Client 1: DRIFT DETECTED (loss change: 0.156) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 0.304) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 0.471) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 0.711) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 0.256) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.931) → weight reduced to 0.3
+  Round 11 accuracy: 0.7866
+
+--- Round 12 ---
+  Round 12 accuracy: 0.7866
+
+--- Round 13 ---
+  Round 13 accuracy: 0.7898
+
+--- Round 14 ---
+  Round 14 accuracy: 0.8057
+
+--- Round 15 ---
+  Round 15 accuracy: 0.8503
+
+--- Round 16 ---
+  Client 0: DRIFT DETECTED (loss change: 3.049) → weight reduced to 0.3
+  Client 1: DRIFT DETECTED (loss change: 1.598) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 1.463) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 2.138) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 2.212) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 1.069) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 3.732) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 1.977) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.764) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 1.967) → weight reduced to 0.3
+  Round 16 accuracy: 0.7000
+
+--- Round 17 ---
+  Round 17 accuracy: 0.8000
+
+--- Round 18 ---
+  Client 0: DRIFT DETECTED (loss change: 0.546) → weight reduced to 0.3
+  Round 18 accuracy: 0.8667
+
+--- Round 19 ---
+  Client 1: DRIFT DETECTED (loss change: 0.205) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 0.257) → weight reduced to 0.3
+  Round 19 accuracy: 0.8667
+
+--- Round 20 ---
+  Round 20 accuracy: 0.8667
+
+--- Round 21 ---
+  Client 1: DRIFT DETECTED (loss change: 0.260) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 0.264) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 0.230) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.471) → weight reduced to 0.3
+  Round 21 accuracy: 0.7027
+
+--- Round 22 ---
+  Client 5: DRIFT DETECTED (loss change: 0.555) → weight reduced to 0.3
+  Round 22 accuracy: 0.7027
+
+--- Round 23 ---
+  Round 23 accuracy: 0.7027
+
+--- Round 24 ---
+  Round 24 accuracy: 0.7027
+
+--- Round 25 ---
+  Client 5: DRIFT DETECTED (loss change: 0.503) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 0.668) → weight reduced to 0.3
+  Round 25 accuracy: 0.7027
+
+--- Round 26 ---
+  Client 0: DRIFT DETECTED (loss change: 4.865) → weight reduced to 0.3
+  Client 1: DRIFT DETECTED (loss change: 2.458) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 2.353) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 2.051) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 1.758) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 0.794) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 2.113) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 3.161) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 1.392) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 2.503) → weight reduced to 0.3
+  Round 26 accuracy: 0.7478
+
+--- Round 27 ---
+  Round 27 accuracy: 0.7807
+
+--- Round 28 ---
+  Round 28 accuracy: 0.7851
+
+--- Round 29 ---
+  Round 29 accuracy: 0.9057
+
+--- Round 30 ---
+  Round 30 accuracy: 0.9298
+
+--- Round 31 ---
+  Client 0: DRIFT DETECTED (loss change: 1.135) → weight reduced to 0.3
+  Client 1: DRIFT DETECTED (loss change: 0.972) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 1.055) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 1.273) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 1.018) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 1.631) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 1.817) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 1.528) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 1.582) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 1.274) → weight reduced to 0.3
+  Round 31 accuracy: 0.8150
+
+--- Round 32 ---
+  Round 32 accuracy: 0.8623
+
+--- Round 33 ---
+  Round 33 accuracy: 0.9040
+
+--- Round 34 ---
+  Round 34 accuracy: 0.9096
+
+--- Round 35 ---
+  Round 35 accuracy: 0.9221
+
+--- Round 36 ---
+  Client 0: DRIFT DETECTED (loss change: 1.401) → weight reduced to 0.3
+  Client 1: DRIFT DETECTED (loss change: 0.826) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 3.457) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 1.235) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 0.345) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 1.024) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 1.260) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 2.226) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 2.089) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 2.902) → weight reduced to 0.3
+  Round 36 accuracy: 0.9123
+
+--- Round 37 ---
+  Round 37 accuracy: 0.9123
+
+--- Round 38 ---
+  Round 38 accuracy: 0.9123
+
+--- Round 39 ---
+  Client 3: DRIFT DETECTED (loss change: 0.507) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 0.175) → weight reduced to 0.3
+  Round 39 accuracy: 0.9123
+
+--- Round 40 ---
+  Client 2: DRIFT DETECTED (loss change: 0.256) → weight reduced to 0.3
+  Round 40 accuracy: 0.9123
+
+--- Round 41 ---
+  Client 0: DRIFT DETECTED (loss change: 1.688) → weight reduced to 0.3
+  Client 1: DRIFT DETECTED (loss change: 5.503) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 1.384) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 3.017) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 2.161) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 1.028) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 0.779) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 2.099) → weight reduced to 0.3
+  Round 41 accuracy: 0.7500
+
+--- Round 42 ---
+  Round 42 accuracy: 0.7717
+
+--- Round 43 ---
+  Round 43 accuracy: 0.8043
+
+--- Round 44 ---
+  Round 44 accuracy: 0.7935
+
+--- Round 45 ---
+  Client 2: DRIFT DETECTED (loss change: 0.535) → weight reduced to 0.3
+  Round 45 accuracy: 0.8696
+
+--- Round 46 ---
+  Client 0: DRIFT DETECTED (loss change: 2.161) → weight reduced to 0.3
+  Client 1: DRIFT DETECTED (loss change: 2.296) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (loss change: 0.689) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (loss change: 1.825) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (loss change: 1.105) → weight reduced to 0.3
+  Client 5: DRIFT DETECTED (loss change: 2.891) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (loss change: 1.333) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (loss change: 2.741) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (loss change: 2.427) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (loss change: 1.271) → weight reduced to 0.3
+  Round 46 accuracy: 0.6946
+
+--- Round 47 ---
+  Round 47 accuracy: 0.7810
+
+--- Round 48 ---
+  Round 48 accuracy: 0.8229
+
+--- Round 49 ---
+  Round 49 accuracy: 0.8271
+
+--- Round 50 ---
+  Round 50 accuracy: 0.8382
+
+CDA drift detection summary:
+  Client 0: drift detected at round 11
+  Client 1: drift detected at round 11
+  Client 2: drift detected at round 11
+  Client 3: drift detected at round 11
+  Client 5: drift detected at round 11
+  Client 7: drift detected at round 11
+  Client 8: drift detected at round 11
+  Client 4: drift detected at round 16
+  Client 6: drift detected at round 16
+  Client 9: drift detected at round 16
+
+CDA-FedAvg Gas complete! Time: 5.51s | Detection-only time: 3.72ms
+
+==================================================
+GAS SENSOR , PROPOSED METHOD: DAAW
+Rounds: 50 | Clients: 10 | Drift: sequential
+Short window: 8 | Long window: 30 | Threshold: 0.15
+==================================================
+
+Drift events: {3: 5, 5: 20, 7: 35, 9: 45}
+Gas Sequential Batch pools: target_floor(train)=20, batches_with_clients_below_floor={4: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 5: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+
+--- Gas Sequential Batch: per-client / per-batch pool sizes (train/test) ---
+Client       Batch 1     Batch 2     Batch 3     Batch 4     Batch 5     Batch 6     Batch 7     Batch 8     Batch 9    Batch 10
+0               36/8      106/26      136/33        13/3        16/4      196/48      308/76        23/5        38/9      306/76
+1              59/14      189/47      242/60        13/3        16/4      352/87     552/137        30/7       64/16     549/137
+2              50/12      150/37      191/47        13/3        16/3      276/69     434/108        28/7       53/13     432/108
+3               37/9      109/27      139/34        13/3        16/4      201/50      316/79        24/5        39/9      315/78
+4               39/9      116/28      147/36        13/3        16/4      213/53      334/83        24/6       41/10      333/83
+5               20/5        20/5        24/6        14/3        16/4        36/8       56/13        20/5        20/5       56/13
+6               20/5       41/10       53/13        13/3        16/4       76/19      120/30        20/5        20/5      120/29
+7               28/7       82/20      104/26        13/3        16/4      151/37      236/59        20/5        30/7      236/59
+8               20/5        35/8       44/11        13/3        16/3       64/16      101/25        20/5        20/5      100/25
+9              50/12      151/37      192/48        13/3        16/3      279/69     437/109        28/7       53/13     436/109
+
+--- Round 1 ---
+  Round 1 accuracy: 0.2674 | loss: 1.7753
+
+--- Round 2 ---
+  Round 2 accuracy: 0.4651 | loss: 1.7245
+
+--- Round 3 ---
+  Round 3 accuracy: 0.5116 | loss: 1.6835
+
+--- Round 4 ---
+  Round 4 accuracy: 0.6628 | loss: 1.6247
+
+--- Round 5 ---
+  Round 5 accuracy: 0.6860 | loss: 1.5762
+
+--- Round 6 ---
+  Round 6 accuracy: 0.8449 | loss: 1.5489
+
+--- Round 7 ---
+  Round 7 accuracy: 0.8531 | loss: 1.2975
+
+--- Round 8 ---
+  Round 8 accuracy: 0.8531 | loss: 1.0418
+
+--- Round 9 ---
+  Round 9 accuracy: 0.8490 | loss: 0.8075
+
+--- Round 10 ---
+  Round 10 accuracy: 0.8694 | loss: 0.6521
+
+--- Round 11 ---
+  Round 11 accuracy: 0.7866 | loss: 0.8090
+
+--- Round 12 ---
+  Round 12 accuracy: 0.7866 | loss: 0.6276
+
+--- Round 13 ---
+  Client 8: DRIFT DETECTED (similarity: 0.1334) → weight reduced to 0.3
+  Round 13 accuracy: 0.7898 | loss: 0.5148
+
+--- Round 14 ---
+  Round 14 accuracy: 0.8153 | loss: 0.4456
+
+--- Round 15 ---
+  Round 15 accuracy: 0.8535 | loss: 0.3798
+
+--- Round 16 ---
+  Round 16 accuracy: 0.7000 | loss: 1.2385
+
+--- Round 17 ---
+  Round 17 accuracy: 0.7667 | loss: 0.9872
+
+--- Round 18 ---
+  Round 18 accuracy: 0.8667 | loss: 0.8573
+
+--- Round 19 ---
+  Round 19 accuracy: 0.8667 | loss: 0.7565
+
+--- Round 20 ---
+  Round 20 accuracy: 0.8667 | loss: 0.5937
+
+--- Round 21 ---
+  Client 8: stabilised → weight restored to 1.0
+  Round 21 accuracy: 0.7027 | loss: 0.5853
+
+--- Round 22 ---
+  Round 22 accuracy: 0.7027 | loss: 0.5962
+
+--- Round 23 ---
+  Client 2: DRIFT DETECTED (similarity: 0.1237) → weight reduced to 0.3
+  Round 23 accuracy: 0.7027 | loss: 0.5713
+
+--- Round 24 ---
+  Round 24 accuracy: 0.7027 | loss: 0.4575
+
+--- Round 25 ---
+  Round 25 accuracy: 0.7027 | loss: 0.4771
+
+--- Round 26 ---
+  Client 4: DRIFT DETECTED (similarity: 0.1484) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (similarity: 0.1301) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (similarity: 0.1423) → weight reduced to 0.3
+  Round 26 accuracy: 0.7478 | loss: 1.3887
+
+--- Round 27 ---
+  Client 7: DRIFT DETECTED (similarity: 0.1437) → weight reduced to 0.3
+  Round 27 accuracy: 0.7807 | loss: 0.7876
+
+--- Round 28 ---
+  Round 28 accuracy: 0.7873 | loss: 0.5855
+
+--- Round 29 ---
+  Round 29 accuracy: 0.9123 | loss: 0.4570
+
+--- Round 30 ---
+  Round 30 accuracy: 0.9276 | loss: 0.3706
+
+--- Round 31 ---
+  Round 31 accuracy: 0.8192 | loss: 0.8326
+
+--- Round 32 ---
+  Round 32 accuracy: 0.8609 | loss: 0.6232
+
+--- Round 33 ---
+  Round 33 accuracy: 0.9054 | loss: 0.5262
+
+--- Round 34 ---
+  Round 34 accuracy: 0.9152 | loss: 0.4590
+
+--- Round 35 ---
+  Client 2: stabilised → weight restored to 1.0
+  Client 4: stabilised → weight restored to 1.0
+  Client 7: stabilised → weight restored to 1.0
+  Round 35 accuracy: 0.9249 | loss: 0.4230
+
+--- Round 36 ---
+  Round 36 accuracy: 0.9123 | loss: 1.1671
+
+--- Round 37 ---
+  Client 6: stabilised → weight restored to 1.0
+  Client 8: stabilised → weight restored to 1.0
+  Round 37 accuracy: 0.9123 | loss: 0.8153
+
+--- Round 38 ---
+  Client 5: DRIFT DETECTED (similarity: 0.1193) → weight reduced to 0.3
+  Round 38 accuracy: 0.9123 | loss: 0.5950
+
+--- Round 39 ---
+  Round 39 accuracy: 0.9298 | loss: 0.5860
+
+--- Round 40 ---
+  Round 40 accuracy: 0.9123 | loss: 0.5869
+
+--- Round 41 ---
+  Round 41 accuracy: 0.7500 | loss: 0.9862
+
+--- Round 42 ---
+  Round 42 accuracy: 0.7717 | loss: 0.7847
+
+--- Round 43 ---
+  Client 0: DRIFT DETECTED (similarity: 0.0095) → weight reduced to 0.3
+  Client 2: DRIFT DETECTED (similarity: 0.0192) → weight reduced to 0.3
+  Client 3: DRIFT DETECTED (similarity: 0.0087) → weight reduced to 0.3
+  Client 4: DRIFT DETECTED (similarity: 0.1108) → weight reduced to 0.3
+  Client 6: DRIFT DETECTED (similarity: 0.0926) → weight reduced to 0.3
+  Client 7: DRIFT DETECTED (similarity: 0.0396) → weight reduced to 0.3
+  Client 8: DRIFT DETECTED (similarity: 0.0907) → weight reduced to 0.3
+  Client 9: DRIFT DETECTED (similarity: -0.0016) → weight reduced to 0.3
+  Round 43 accuracy: 0.8152 | loss: 0.6960
+
+--- Round 44 ---
+  Round 44 accuracy: 0.7935 | loss: 0.6459
+
+--- Round 45 ---
+  Client 1: DRIFT DETECTED (similarity: 0.1499) → weight reduced to 0.3
+  Round 45 accuracy: 0.8804 | loss: 0.6360
+
+--- Round 46 ---
+  Round 46 accuracy: 0.6918 | loss: 1.7136
+
+--- Round 47 ---
+  Round 47 accuracy: 0.7755 | loss: 1.0143
+
+--- Round 48 ---
+  Round 48 accuracy: 0.8173 | loss: 0.7061
+
+--- Round 49 ---
+  Round 49 accuracy: 0.8229 | loss: 0.6069
+
+--- Round 50 ---
+  Round 50 accuracy: 0.8396 | loss: 0.5652
+
+Drift detection summary:
+  Client 8: drift detected at round 13
+  Client 2: drift detected at round 23
+  Client 4: drift detected at round 26
+  Client 6: drift detected at round 26
+  Client 7: drift detected at round 27
+  Client 5: drift detected at round 38
+  Client 0: drift detected at round 43
+  Client 3: drift detected at round 43
+  Client 9: drift detected at round 43
+  Client 1: drift detected at round 45
+
+DAAW Gas complete! Time: 7.30s | Detection-only time: 644.27ms
+
+============================================================
+SEED 42 GATE TEST SUMMARY (V3)
+============================================================
+
+har_activity_drift:
+  CDA : {'precision': 0.25, 'recall': 1.0, 'f1': 0.4, 'avg_detection_delay': 5.25, 'total_tp': 2, 'total_fp': 12, 'detected_events': 4, 'total_events': 4}
+  DAAW: {'precision': 0.0, 'recall': 0.0, 'f1': 0.0, 'avg_detection_delay': None, 'total_tp': 0, 'total_fp': 1, 'detected_events': 0, 'total_events': 4}
+
+gas_sudden_batch:
+  CDA : {'precision': 0.2857, 'recall': 1.0, 'f1': 0.4444, 'avg_detection_delay': 0.0, 'total_tp': 2, 'total_fp': 10, 'detected_events': 4, 'total_events': 4}
+  DAAW: {'precision': 0.6667, 'recall': 1.0, 'f1': 0.8, 'avg_detection_delay': 1.5, 'total_tp': 4, 'total_fp': 2, 'detected_events': 4, 'total_events': 4}
+
+gas_sequential_batch:
+  CDA : {'precision': 1.0, 'recall': 1.0, 'f1': 1.0, 'avg_detection_delay': 6.5, 'total_tp': 14, 'total_fp': 0, 'detected_events': 10, 'total_events': 10}
+  DAAW: {'precision': 1.0, 'recall': 1.0, 'f1': 1.0, 'avg_detection_delay': 26.7, 'total_tp': 16, 'total_fp': 0, 'detected_events': 10, 'total_events': 10}

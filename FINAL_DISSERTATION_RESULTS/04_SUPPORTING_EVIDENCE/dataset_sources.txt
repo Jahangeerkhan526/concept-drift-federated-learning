@@ -1,0 +1,27 @@
+Dataset Sources
+===============
+
+UCI HAR (Human Activity Recognition Using Smartphones)
+- Original paper: Anguita, D., Ghio, A., Oneto, L., Parra, X., & Reyes-Ortiz, J. L. (2013).
+  A public domain dataset for human activity recognition using smartphones.
+  ESANN 2013. https://www.esann.org/sites/default/files/proceedings/legacy/es2013-84.pdf
+- Dataset citation: Reyes-Ortiz, J., Anguita, D., Ghio, A., Oneto, L., & Parra, X. (2013).
+  Human Activity Recognition Using Smartphones [Dataset]. UCI Machine Learning Repository.
+  https://doi.org/10.24432/C54S4K
+- Access: Public, open access
+- Description: Smartphone accelerometer/gyroscope readings, 6 activity classes,
+  561 features, 10,299 samples
+
+Gas Sensor Array Drift Dataset
+- Original paper: Vergara, A., Vembu, S., Ayhan, T., Ryan, M. A., Homer, M. L., & Huerta, R. (2012).
+  Chemical gas sensor drift compensation using classifier ensembles.
+  Sensors and Actuators B: Chemical, 166-167, 320-329.
+  https://doi.org/10.1016/j.snb.2012.01.074
+- Dataset citation: Vergara, A. (2012). Gas Sensor Array Drift Dataset [Dataset].
+  UCI Machine Learning Repository. https://doi.org/10.24432/C5MK6M
+- Access: Public, open access
+- Description: Metal-oxide gas sensor readings across 10 batches collected over
+  36 months, 6 gas classes, 128 features, 13,910 samples
+
+Neither dataset required ethics approval: both are public, secondary, anonymised
+data with no primary human data collection performed for this project.

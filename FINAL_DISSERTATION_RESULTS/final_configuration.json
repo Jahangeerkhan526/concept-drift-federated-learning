@@ -1,0 +1,78 @@
+{
+  "pipeline_version": "V4 (corrected)",
+  "clients": 10,
+  "rounds": 50,
+  "datasets": [
+    "UCI HAR",
+    "Gas Sensor Array Drift"
+  ],
+  "scenarios": [
+    "har_label_shuffle",
+    "har_activity_drift",
+    "gas_label_shuffle",
+    "gas_sudden_batch",
+    "gas_sequential_batch"
+  ],
+  "development_seed": 42,
+  "primary_seeds": [
+    42,
+    123,
+    456,
+    789,
+    999
+  ],
+  "adaptive_extension_validation_seeds": [
+    123,
+    456,
+    789,
+    999
+  ],
+  "methods": [
+    "FedAvg",
+    "CDA-FedAvg",
+    "DAAW"
+  ],
+  "daaw_fixed_config": {
+    "default_four_scenarios": {
+      "short_window": 5,
+      "long_window": 20,
+      "threshold": 0.3
+    },
+    "gas_sequential_batch": {
+      "short_window": 8,
+      "long_window": 30,
+      "threshold": 0.15
+    }
+  },
+  "daaw_adaptive_extension_config": {
+    "short_window": 3,
+    "long_window": 10,
+    "lambda": 3.0,
+    "confirmation_rule": "2 of latest 3 rounds",
+    "note": "Exploratory only - not adopted as the primary reported result. See 03_EXPLORATORY_ADAPTIVE/MANIFEST.md."
+  },
+  "metrics": [
+    "event-level precision",
+    "event-level recall",
+    "event-level F1",
+    "false-alarm episodes",
+    "detection delay",
+    "mean locally adapted client accuracy"
+  ],
+  "significance_test": "paired t-test, DAAW vs CDA-FedAvg F1, n=5 seeds",
+  "corrections_from_v2": [
+    "Client-ownership partitioning redesign (joint class+batch partitioning with floor guarantees)",
+    "Permanent train/test boundary preservation (no re-split across drift injection)",
+    "Sample-weighted mean loss for CDA's drift-trigger comparison",
+    "Gas scaler fit only on reference batches (no future-batch leakage)",
+    "Sequential drift ground truth corrected to reflect the true first-transition round",
+    "Warm-up gate requires short_window + long_window history before any detection decision"
+  ],
+  "status": {
+    "five_seed_results": "complete - real V4 data from a fresh full run of significance_test_v3.py (all 5 scenarios x 5 seeds), verified to match the prior aggregated-from-scattered-JSONs numbers exactly before replacing them",
+    "summary_figures_tables": "complete - all 9 figures, all 4 tables",
+    "scenario_runs_trajectory_graphs": "complete - fresh seed-42 run per scenario via server_v3.py/server_gas_v3.py, cross-checked field-for-field against five_seed_results/*/seed_42.json (exact match on precision/recall/F1 for all 5 scenarios)",
+    "sensitivity_analysis": "historical (V2/pre-correction) - not verified under V4 methodology",
+    "exploratory_adaptive_extension": "complete - Stage 1-4 real data, validated on 4 unseen seeds"
+  }
+}

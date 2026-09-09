@@ -1,0 +1,35 @@
+{
+  "title": "Scenario 1: Label Shuffle",
+  "cda": {
+    "precision": 0.2222,
+    "recall": 1.0,
+    "f1": 0.3636,
+    "avg_detection_delay": 0.0,
+    "total_tp": 2,
+    "total_fp": 14,
+    "detected_events": 4,
+    "total_events": 4
+  },
+  "daaw": {
+    "precision": 0.8,
+    "recall": 1.0,
+    "f1": 0.8889,
+    "avg_detection_delay": 1.25,
+    "total_tp": 4,
+    "total_fp": 1,
+    "detected_events": 4,
+    "total_events": 4
+  },
+  "computational_time_seconds": {
+    "fedavg": 24.88,
+    "cda": 25.79,
+    "daaw": 45.03,
+    "cda_detection_ms": 8.197,
+    "daaw_detection_ms": 2023.743
+  },
+  "final_accuracy": {
+    "fedavg": 0.7994,
+    "cda": 0.8023,
+    "daaw": 0.795
+  }
+}

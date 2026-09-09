@@ -1,0 +1,233 @@
+{
+  "scenario": "har_label_shuffle",
+  "seeds": [
+    123,
+    456,
+    789,
+    999
+  ],
+  "fedavg_accuracy": {
+    "mean": 0.7741147504899316,
+    "std": 0.03152535067410456
+  },
+  "fedavg_loss": {
+    "mean": 0.6795103509441182,
+    "std": 0.06210909061523872
+  },
+  "cda_accuracy": {
+    "mean": 0.7742365825025799,
+    "std": 0.02921726350649484
+  },
+  "cda_loss": {
+    "mean": 0.6646957640830745,
+    "std": 0.07015805109388577
+  },
+  "daaw_fixed_accuracy": {
+    "mean": 0.7753308813087563,
+    "std": 0.02145735864399483
+  },
+  "daaw_fixed_loss": {
+    "mean": 0.7091041817249377,
+    "std": 0.05786656849176408
+  },
+  "daaw_adaptive_accuracy": {
+    "mean": 0.7673025126151457,
+    "std": 0.031204752247221086
+  },
+  "daaw_adaptive_loss": {
+    "mean": 0.704433581729019,
+    "std": 0.06364624729509827
+  },
+  "cda_precision": {
+    "mean": 0.23015000000000002,
+    "std": 0.021260997154413992,
+    "raw": [
+      0.2353,
+      0.2,
+      0.25,
+      0.2353
+    ]
+  },
+  "cda_recall": {
+    "mean": 1.0,
+    "std": 0.0,
+    "raw": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "cda_f1": {
+    "mean": 0.373825,
+    "std": 0.028462650965783227,
+    "raw": [
+      0.381,
+      0.3333,
+      0.4,
+      0.381
+    ]
+  },
+  "cda_avg_detection_delay": {
+    "mean": 0.0,
+    "std": 0.0,
+    "raw": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "cda_total_fp": {
+    "mean": 13.5,
+    "std": 1.7320508075688772,
+    "raw": [
+      13,
+      16,
+      12,
+      13
+    ]
+  },
+  "cda_detected_events": {
+    "mean": 4.0,
+    "std": 0.0,
+    "raw": [
+      4,
+      4,
+      4,
+      4
+    ]
+  },
+  "daaw_fixed_precision": {
+    "mean": 1.0,
+    "std": 0.0,
+    "raw": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "daaw_fixed_recall": {
+    "mean": 1.0,
+    "std": 0.0,
+    "raw": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "daaw_fixed_f1": {
+    "mean": 1.0,
+    "std": 0.0,
+    "raw": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "daaw_fixed_avg_detection_delay": {
+    "mean": 0.5,
+    "std": 0.3535533905932738,
+    "raw": [
+      0.25,
+      0.25,
+      0.5,
+      1.0
+    ]
+  },
+  "daaw_fixed_total_fp": {
+    "mean": 0.0,
+    "std": 0.0,
+    "raw": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "daaw_fixed_detected_events": {
+    "mean": 4.0,
+    "std": 0.0,
+    "raw": [
+      4,
+      4,
+      4,
+      4
+    ]
+  },
+  "daaw_adaptive_precision": {
+    "mean": 0.46109999999999995,
+    "std": 0.04843731344050093,
+    "raw": [
+      0.4444,
+      0.5,
+      0.5,
+      0.4
+    ]
+  },
+  "daaw_adaptive_recall": {
+    "mean": 1.0,
+    "std": 0.0,
+    "raw": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "daaw_adaptive_f1": {
+    "mean": 0.63005,
+    "std": 0.04597423191310539,
+    "raw": [
+      0.6154,
+      0.6667,
+      0.6667,
+      0.5714
+    ]
+  },
+  "daaw_adaptive_avg_detection_delay": {
+    "mean": 0.8125,
+    "std": 0.125,
+    "raw": [
+      0.75,
+      0.75,
+      0.75,
+      1.0
+    ]
+  },
+  "daaw_adaptive_total_fp": {
+    "mean": 4.75,
+    "std": 0.9574271077563381,
+    "raw": [
+      5,
+      4,
+      4,
+      6
+    ]
+  },
+  "daaw_adaptive_detected_events": {
+    "mean": 4.0,
+    "std": 0.0,
+    "raw": [
+      4,
+      4,
+      4,
+      4
+    ]
+  },
+  "paired_ttest_adaptive_vs_fixed_f1": {
+    "t_stat": -16.09379796487877,
+    "p_value": 0.0005217849410130287
+  },
+  "paired_ttest_adaptive_vs_cda_f1": {
+    "t_stat": 8.511343948319464,
+    "p_value": 0.0034064714249510313
+  },
+  "paired_ttest_fixed_vs_cda_f1": {
+    "t_stat": 43.99976662418159,
+    "p_value": 2.5841197508700874e-05
+  }
+}

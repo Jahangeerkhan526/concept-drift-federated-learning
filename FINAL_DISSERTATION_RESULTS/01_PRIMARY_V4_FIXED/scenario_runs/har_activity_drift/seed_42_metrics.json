@@ -1,0 +1,35 @@
+{
+  "title": "Scenario 2: Activity Distribution Drift",
+  "cda": {
+    "precision": 0.2222,
+    "recall": 1.0,
+    "f1": 0.3636,
+    "avg_detection_delay": 5.5,
+    "total_tp": 2,
+    "total_fp": 14,
+    "detected_events": 4,
+    "total_events": 4
+  },
+  "daaw": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "avg_detection_delay": null,
+    "total_tp": 0,
+    "total_fp": 1,
+    "detected_events": 0,
+    "total_events": 4
+  },
+  "computational_time_seconds": {
+    "fedavg": 38.57,
+    "cda": 38.44,
+    "daaw": 41.74,
+    "cda_detection_ms": 13.534,
+    "daaw_detection_ms": 2002.526
+  },
+  "final_accuracy": {
+    "fedavg": 0.9781,
+    "cda": 0.9781,
+    "daaw": 0.9725
+  }
+}

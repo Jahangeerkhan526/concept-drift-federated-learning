@@ -1,0 +1,202 @@
+{
+  "stage": "STAGE 2",
+  "seed": 42,
+  "num_rounds": 50,
+  "locked_short_window": 3,
+  "locked_long_window": 10,
+  "absolute_threshold_fixed_at": 0.3,
+  "confirmation_rule": "candidate condition true in >= 2 of latest 3 rounds",
+  "candidates": {
+    "lambda2.0": {
+      "lambda": 2.0,
+      "short_window": 3,
+      "long_window": 10,
+      "absolute_threshold": 0.3,
+      "scenario_metrics": {
+        "har_label_shuffle": {
+          "precision": 0.3636,
+          "recall": 1.0,
+          "f1": 0.5333,
+          "avg_detection_delay": 1.0,
+          "total_tp": 3,
+          "total_fp": 7,
+          "detected_events": 4,
+          "total_events": 4
+        },
+        "har_activity_drift": {
+          "precision": 0.3636,
+          "recall": 1.0,
+          "f1": 0.5333,
+          "avg_detection_delay": 1.25,
+          "total_tp": 3,
+          "total_fp": 7,
+          "detected_events": 4,
+          "total_events": 4
+        },
+        "gas_label_shuffle": {
+          "precision": 0.3636,
+          "recall": 1.0,
+          "f1": 0.5333,
+          "avg_detection_delay": 0.75,
+          "total_tp": 2,
+          "total_fp": 7,
+          "detected_events": 4,
+          "total_events": 4
+        },
+        "gas_sudden_batch": {
+          "precision": 0.3636,
+          "recall": 1.0,
+          "f1": 0.5333,
+          "avg_detection_delay": 1.25,
+          "total_tp": 3,
+          "total_fp": 7,
+          "detected_events": 4,
+          "total_events": 4
+        },
+        "gas_sequential_batch": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "avg_detection_delay": 2.0,
+          "total_tp": 10,
+          "total_fp": 0,
+          "detected_events": 10,
+          "total_events": 10
+        }
+      },
+      "macro_f1": 0.6266,
+      "total_false_alarms": 28,
+      "mean_detection_delay": 1.25
+    },
+    "lambda2.5": {
+      "lambda": 2.5,
+      "short_window": 3,
+      "long_window": 10,
+      "absolute_threshold": 0.3,
+      "scenario_metrics": {
+        "har_label_shuffle": {
+          "precision": 0.3636,
+          "recall": 1.0,
+          "f1": 0.5333,
+          "avg_detection_delay": 1.0,
+          "total_tp": 3,
+          "total_fp": 7,
+          "detected_events": 4,
+          "total_events": 4
+        },
+        "har_activity_drift": {
+          "precision": 0.3636,
+          "recall": 1.0,
+          "f1": 0.5333,
+          "avg_detection_delay": 1.25,
+          "total_tp": 3,
+          "total_fp": 7,
+          "detected_events": 4,
+          "total_events": 4
+        },
+        "gas_label_shuffle": {
+          "precision": 0.3636,
+          "recall": 1.0,
+          "f1": 0.5333,
+          "avg_detection_delay": 1.25,
+          "total_tp": 3,
+          "total_fp": 7,
+          "detected_events": 4,
+          "total_events": 4
+        },
+        "gas_sudden_batch": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "f1": 0.5714,
+          "avg_detection_delay": 1.25,
+          "total_tp": 4,
+          "total_fp": 6,
+          "detected_events": 4,
+          "total_events": 4
+        },
+        "gas_sequential_batch": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "avg_detection_delay": 2.0,
+          "total_tp": 10,
+          "total_fp": 0,
+          "detected_events": 10,
+          "total_events": 10
+        }
+      },
+      "macro_f1": 0.6343,
+      "total_false_alarms": 27,
+      "mean_detection_delay": 1.35
+    },
+    "lambda3.0": {
+      "lambda": 3.0,
+      "short_window": 3,
+      "long_window": 10,
+      "absolute_threshold": 0.3,
+      "scenario_metrics": {
+        "har_label_shuffle": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "f1": 0.5714,
+          "avg_detection_delay": 1.25,
+          "total_tp": 4,
+          "total_fp": 6,
+          "detected_events": 4,
+          "total_events": 4
+        },
+        "har_activity_drift": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "f1": 0.5714,
+          "avg_detection_delay": 2.0,
+          "total_tp": 4,
+          "total_fp": 6,
+          "detected_events": 4,
+          "total_events": 4
+        },
+        "gas_label_shuffle": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "f1": 0.5714,
+          "avg_detection_delay": 1.25,
+          "total_tp": 4,
+          "total_fp": 6,
+          "detected_events": 4,
+          "total_events": 4
+        },
+        "gas_sudden_batch": {
+          "precision": 0.4444,
+          "recall": 1.0,
+          "f1": 0.6154,
+          "avg_detection_delay": 1.25,
+          "total_tp": 4,
+          "total_fp": 5,
+          "detected_events": 4,
+          "total_events": 4
+        },
+        "gas_sequential_batch": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "avg_detection_delay": 2.0,
+          "total_tp": 10,
+          "total_fp": 0,
+          "detected_events": 10,
+          "total_events": 10
+        }
+      },
+      "macro_f1": 0.6659,
+      "total_false_alarms": 23,
+      "mean_detection_delay": 1.55
+    }
+  },
+  "ranking": [
+    "lambda3.0",
+    "lambda2.5",
+    "lambda2.0"
+  ],
+  "selected_configuration": "lambda3.0",
+  "selected_lambda": 3.0,
+  "selection_rule": "macro_f1 desc, then total_false_alarms asc, then mean_detection_delay asc"
+}

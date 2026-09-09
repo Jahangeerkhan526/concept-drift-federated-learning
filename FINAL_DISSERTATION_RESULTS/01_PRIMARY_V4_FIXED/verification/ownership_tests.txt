@@ -1,0 +1,453 @@
+============================================================
+TEST 1: HAR Activity Drift — client ownership, no duplication, transparency table
+============================================================
+Loading UCI HAR from cache...
+Dataset ready: 10299 samples, 561 features, 6 classes
+Client   Orig size Orig tgt% Post size Post tgt%  Train   Test   Dup  TT-ovlp  XC-ovlp
+  [PASS] client 3: drifted train rows all belong to client's own partition
+  [PASS] client 3: drifted test rows all belong to client's own partition
+  [PASS] client 3: no duplicated samples in post-drift pool (n=292, unique=292)
+  [PASS] client 3: train/test pools don't overlap
+  [PASS] client 3: post-drift training stays inside original training split
+  [PASS] client 3: post-drift evaluation stays inside original held-out split
+3              634     23.0%       292     50.0%    224     68     0        0      n/a
+  [PASS] client 5: drifted train rows all belong to client's own partition
+  [PASS] client 5: drifted test rows all belong to client's own partition
+  [PASS] client 5: no duplicated samples in post-drift pool (n=762, unique=762)
+  [PASS] client 5: train/test pools don't overlap
+  [PASS] client 5: post-drift training stays inside original training split
+  [PASS] client 5: post-drift evaluation stays inside original held-out split
+5             1403     27.2%       762     50.0%    604    158     0        0      n/a
+  [PASS] client 7: drifted train rows all belong to client's own partition
+  [PASS] client 7: drifted test rows all belong to client's own partition
+  [PASS] client 7: no duplicated samples in post-drift pool (n=138, unique=138)
+  [PASS] client 7: train/test pools don't overlap
+  [PASS] client 7: post-drift training stays inside original training split
+  [PASS] client 7: post-drift evaluation stays inside original held-out split
+7              199     34.7%       138     50.0%    118     20     0        0      n/a
+  [PASS] client 9: drifted train rows all belong to client's own partition
+  [PASS] client 9: drifted test rows all belong to client's own partition
+  [PASS] client 9: no duplicated samples in post-drift pool (n=224, unique=224)
+  [PASS] client 9: train/test pools don't overlap
+  [PASS] client 9: post-drift training stays inside original training split
+  [PASS] client 9: post-drift evaluation stays inside original held-out split
+9              601     18.6%       224     50.0%    178     46     0        0      n/a
+
+============================================================
+TEST 2: Gas Sudden Batch — joint per-batch ownership, restriction, disjointness, floor
+============================================================
+Loading Gas Sensor dataset with batch info from cache (v3, reference-fit scaler)...
+Dataset ready: 13910 samples, 128 features, 6 classes
+Gas Sudden Batch pools: early_total=3275, late_total=4364, target_floor(train)=20, clients_below_floor=none
+  [PASS] client 0: pre-drift train/test disjoint
+  [PASS] client 0: post-drift train/test disjoint
+  [PASS] client 0: pre-drift pool only contains early-batch (1-3) samples
+  [PASS] client 0: post-drift pool only contains late-batch (8-10) samples
+  [PASS] client 0: no sample double-assigned across clients (pre-drift)
+  [PASS] client 0: no sample double-assigned across clients (post-drift)
+  [PASS] client 0: pre-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 0: post-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 1: pre-drift train/test disjoint
+  [PASS] client 1: post-drift train/test disjoint
+  [PASS] client 1: pre-drift pool only contains early-batch (1-3) samples
+  [PASS] client 1: post-drift pool only contains late-batch (8-10) samples
+  [PASS] client 1: no sample double-assigned across clients (pre-drift)
+  [PASS] client 1: no sample double-assigned across clients (post-drift)
+  [PASS] client 1: pre-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 1: post-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 2: pre-drift train/test disjoint
+  [PASS] client 2: post-drift train/test disjoint
+  [PASS] client 2: pre-drift pool only contains early-batch (1-3) samples
+  [PASS] client 2: post-drift pool only contains late-batch (8-10) samples
+  [PASS] client 2: no sample double-assigned across clients (pre-drift)
+  [PASS] client 2: no sample double-assigned across clients (post-drift)
+  [PASS] client 2: pre-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 2: post-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 3: pre-drift train/test disjoint
+  [PASS] client 3: post-drift train/test disjoint
+  [PASS] client 3: pre-drift pool only contains early-batch (1-3) samples
+  [PASS] client 3: post-drift pool only contains late-batch (8-10) samples
+  [PASS] client 3: no sample double-assigned across clients (pre-drift)
+  [PASS] client 3: no sample double-assigned across clients (post-drift)
+  [PASS] client 3: pre-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 3: post-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 4: pre-drift train/test disjoint
+  [PASS] client 4: post-drift train/test disjoint
+  [PASS] client 4: pre-drift pool only contains early-batch (1-3) samples
+  [PASS] client 4: post-drift pool only contains late-batch (8-10) samples
+  [PASS] client 4: no sample double-assigned across clients (pre-drift)
+  [PASS] client 4: no sample double-assigned across clients (post-drift)
+  [PASS] client 4: pre-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 4: post-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 5: pre-drift train/test disjoint
+  [PASS] client 5: post-drift train/test disjoint
+  [PASS] client 5: pre-drift pool only contains early-batch (1-3) samples
+  [PASS] client 5: post-drift pool only contains late-batch (8-10) samples
+  [PASS] client 5: no sample double-assigned across clients (pre-drift)
+  [PASS] client 5: no sample double-assigned across clients (post-drift)
+  [PASS] client 5: pre-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 5: post-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 6: pre-drift train/test disjoint
+  [PASS] client 6: post-drift train/test disjoint
+  [PASS] client 6: pre-drift pool only contains early-batch (1-3) samples
+  [PASS] client 6: post-drift pool only contains late-batch (8-10) samples
+  [PASS] client 6: no sample double-assigned across clients (pre-drift)
+  [PASS] client 6: no sample double-assigned across clients (post-drift)
+  [PASS] client 6: pre-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 6: post-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 7: pre-drift train/test disjoint
+  [PASS] client 7: post-drift train/test disjoint
+  [PASS] client 7: pre-drift pool only contains early-batch (1-3) samples
+  [PASS] client 7: post-drift pool only contains late-batch (8-10) samples
+  [PASS] client 7: no sample double-assigned across clients (pre-drift)
+  [PASS] client 7: no sample double-assigned across clients (post-drift)
+  [PASS] client 7: pre-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 7: post-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 8: pre-drift train/test disjoint
+  [PASS] client 8: post-drift train/test disjoint
+  [PASS] client 8: pre-drift pool only contains early-batch (1-3) samples
+  [PASS] client 8: post-drift pool only contains late-batch (8-10) samples
+  [PASS] client 8: no sample double-assigned across clients (pre-drift)
+  [PASS] client 8: no sample double-assigned across clients (post-drift)
+  [PASS] client 8: pre-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 8: post-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 9: pre-drift train/test disjoint
+  [PASS] client 9: post-drift train/test disjoint
+  [PASS] client 9: pre-drift pool only contains early-batch (1-3) samples
+  [PASS] client 9: post-drift pool only contains late-batch (8-10) samples
+  [PASS] client 9: no sample double-assigned across clients (pre-drift)
+  [PASS] client 9: no sample double-assigned across clients (post-drift)
+  [PASS] client 9: pre-drift pool meets or reasonably approaches floor (20)
+  [PASS] client 9: post-drift pool meets or reasonably approaches floor (20)
+
+============================================================
+TEST 3: Gas Sequential Batch — joint per-batch ownership, restriction, disjointness, floor
+============================================================
+Gas Sequential Batch pools: target_floor(train)=20, batches_with_clients_below_floor={4: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 5: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+
+--- Gas Sequential Batch: per-client / per-batch pool sizes (train/test) ---
+Client       Batch 1     Batch 2     Batch 3     Batch 4     Batch 5     Batch 6     Batch 7     Batch 8     Batch 9    Batch 10
+0              44/11       84/20       88/21        13/3        16/3      228/57      304/75        27/6       52/12      340/84
+1              54/13      110/27      216/54        13/3        16/4     408/101     593/148        27/6       59/14     571/142
+2              55/13      184/46      165/41        13/3        16/4      270/67      390/97        27/6       60/14     449/112
+3               35/8      175/43      149/37        13/3        16/4      234/58      271/67        27/6        30/7      256/64
+4               31/7      100/25      180/44        13/3        16/4      111/27     409/102        20/5       42/10      350/87
+5               20/5        20/5        23/5        13/3        16/3        32/7       60/15        20/5        20/5       56/14
+6               20/5        34/8       60/14        13/3        16/3       60/14      140/34        20/5        20/5      122/30
+7               25/6      106/26      106/26        13/3        16/4      158/39      225/56        27/6        26/6      212/53
+8               20/5        31/7        30/7        13/3        16/3       60/15      114/28        20/5        20/5      108/27
+9              55/13      155/38      256/64        14/3        17/4      284/70      388/97        24/5       51/12     419/104
+  [PASS] client 0 batch 1: train/test disjoint
+  [PASS] client 0 batch 1: pool only contains batch-1 samples
+  [PASS] client 0 batch 1: no sample double-assigned across clients
+  [PASS] client 1 batch 1: train/test disjoint
+  [PASS] client 1 batch 1: pool only contains batch-1 samples
+  [PASS] client 1 batch 1: no sample double-assigned across clients
+  [PASS] client 2 batch 1: train/test disjoint
+  [PASS] client 2 batch 1: pool only contains batch-1 samples
+  [PASS] client 2 batch 1: no sample double-assigned across clients
+  [PASS] client 3 batch 1: train/test disjoint
+  [PASS] client 3 batch 1: pool only contains batch-1 samples
+  [PASS] client 3 batch 1: no sample double-assigned across clients
+  [PASS] client 4 batch 1: train/test disjoint
+  [PASS] client 4 batch 1: pool only contains batch-1 samples
+  [PASS] client 4 batch 1: no sample double-assigned across clients
+  [PASS] client 5 batch 1: train/test disjoint
+  [PASS] client 5 batch 1: pool only contains batch-1 samples
+  [PASS] client 5 batch 1: no sample double-assigned across clients
+  [PASS] client 6 batch 1: train/test disjoint
+  [PASS] client 6 batch 1: pool only contains batch-1 samples
+  [PASS] client 6 batch 1: no sample double-assigned across clients
+  [PASS] client 7 batch 1: train/test disjoint
+  [PASS] client 7 batch 1: pool only contains batch-1 samples
+  [PASS] client 7 batch 1: no sample double-assigned across clients
+  [PASS] client 8 batch 1: train/test disjoint
+  [PASS] client 8 batch 1: pool only contains batch-1 samples
+  [PASS] client 8 batch 1: no sample double-assigned across clients
+  [PASS] client 9 batch 1: train/test disjoint
+  [PASS] client 9 batch 1: pool only contains batch-1 samples
+  [PASS] client 9 batch 1: no sample double-assigned across clients
+  [PASS] batch 1: every available sample assigned exactly once
+  [PASS] client 0 batch 2: train/test disjoint
+  [PASS] client 0 batch 2: pool only contains batch-2 samples
+  [PASS] client 0 batch 2: no sample double-assigned across clients
+  [PASS] client 1 batch 2: train/test disjoint
+  [PASS] client 1 batch 2: pool only contains batch-2 samples
+  [PASS] client 1 batch 2: no sample double-assigned across clients
+  [PASS] client 2 batch 2: train/test disjoint
+  [PASS] client 2 batch 2: pool only contains batch-2 samples
+  [PASS] client 2 batch 2: no sample double-assigned across clients
+  [PASS] client 3 batch 2: train/test disjoint
+  [PASS] client 3 batch 2: pool only contains batch-2 samples
+  [PASS] client 3 batch 2: no sample double-assigned across clients
+  [PASS] client 4 batch 2: train/test disjoint
+  [PASS] client 4 batch 2: pool only contains batch-2 samples
+  [PASS] client 4 batch 2: no sample double-assigned across clients
+  [PASS] client 5 batch 2: train/test disjoint
+  [PASS] client 5 batch 2: pool only contains batch-2 samples
+  [PASS] client 5 batch 2: no sample double-assigned across clients
+  [PASS] client 6 batch 2: train/test disjoint
+  [PASS] client 6 batch 2: pool only contains batch-2 samples
+  [PASS] client 6 batch 2: no sample double-assigned across clients
+  [PASS] client 7 batch 2: train/test disjoint
+  [PASS] client 7 batch 2: pool only contains batch-2 samples
+  [PASS] client 7 batch 2: no sample double-assigned across clients
+  [PASS] client 8 batch 2: train/test disjoint
+  [PASS] client 8 batch 2: pool only contains batch-2 samples
+  [PASS] client 8 batch 2: no sample double-assigned across clients
+  [PASS] client 9 batch 2: train/test disjoint
+  [PASS] client 9 batch 2: pool only contains batch-2 samples
+  [PASS] client 9 batch 2: no sample double-assigned across clients
+  [PASS] batch 2: every available sample assigned exactly once
+  [PASS] client 0 batch 3: train/test disjoint
+  [PASS] client 0 batch 3: pool only contains batch-3 samples
+  [PASS] client 0 batch 3: no sample double-assigned across clients
+  [PASS] client 1 batch 3: train/test disjoint
+  [PASS] client 1 batch 3: pool only contains batch-3 samples
+  [PASS] client 1 batch 3: no sample double-assigned across clients
+  [PASS] client 2 batch 3: train/test disjoint
+  [PASS] client 2 batch 3: pool only contains batch-3 samples
+  [PASS] client 2 batch 3: no sample double-assigned across clients
+  [PASS] client 3 batch 3: train/test disjoint
+  [PASS] client 3 batch 3: pool only contains batch-3 samples
+  [PASS] client 3 batch 3: no sample double-assigned across clients
+  [PASS] client 4 batch 3: train/test disjoint
+  [PASS] client 4 batch 3: pool only contains batch-3 samples
+  [PASS] client 4 batch 3: no sample double-assigned across clients
+  [PASS] client 5 batch 3: train/test disjoint
+  [PASS] client 5 batch 3: pool only contains batch-3 samples
+  [PASS] client 5 batch 3: no sample double-assigned across clients
+  [PASS] client 6 batch 3: train/test disjoint
+  [PASS] client 6 batch 3: pool only contains batch-3 samples
+  [PASS] client 6 batch 3: no sample double-assigned across clients
+  [PASS] client 7 batch 3: train/test disjoint
+  [PASS] client 7 batch 3: pool only contains batch-3 samples
+  [PASS] client 7 batch 3: no sample double-assigned across clients
+  [PASS] client 8 batch 3: train/test disjoint
+  [PASS] client 8 batch 3: pool only contains batch-3 samples
+  [PASS] client 8 batch 3: no sample double-assigned across clients
+  [PASS] client 9 batch 3: train/test disjoint
+  [PASS] client 9 batch 3: pool only contains batch-3 samples
+  [PASS] client 9 batch 3: no sample double-assigned across clients
+  [PASS] batch 3: every available sample assigned exactly once
+  [PASS] client 0 batch 4: train/test disjoint
+  [PASS] client 0 batch 4: pool only contains batch-4 samples
+  [PASS] client 0 batch 4: no sample double-assigned across clients
+  [PASS] client 1 batch 4: train/test disjoint
+  [PASS] client 1 batch 4: pool only contains batch-4 samples
+  [PASS] client 1 batch 4: no sample double-assigned across clients
+  [PASS] client 2 batch 4: train/test disjoint
+  [PASS] client 2 batch 4: pool only contains batch-4 samples
+  [PASS] client 2 batch 4: no sample double-assigned across clients
+  [PASS] client 3 batch 4: train/test disjoint
+  [PASS] client 3 batch 4: pool only contains batch-4 samples
+  [PASS] client 3 batch 4: no sample double-assigned across clients
+  [PASS] client 4 batch 4: train/test disjoint
+  [PASS] client 4 batch 4: pool only contains batch-4 samples
+  [PASS] client 4 batch 4: no sample double-assigned across clients
+  [PASS] client 5 batch 4: train/test disjoint
+  [PASS] client 5 batch 4: pool only contains batch-4 samples
+  [PASS] client 5 batch 4: no sample double-assigned across clients
+  [PASS] client 6 batch 4: train/test disjoint
+  [PASS] client 6 batch 4: pool only contains batch-4 samples
+  [PASS] client 6 batch 4: no sample double-assigned across clients
+  [PASS] client 7 batch 4: train/test disjoint
+  [PASS] client 7 batch 4: pool only contains batch-4 samples
+  [PASS] client 7 batch 4: no sample double-assigned across clients
+  [PASS] client 8 batch 4: train/test disjoint
+  [PASS] client 8 batch 4: pool only contains batch-4 samples
+  [PASS] client 8 batch 4: no sample double-assigned across clients
+  [PASS] client 9 batch 4: train/test disjoint
+  [PASS] client 9 batch 4: pool only contains batch-4 samples
+  [PASS] client 9 batch 4: no sample double-assigned across clients
+  [PASS] batch 4: every available sample assigned exactly once
+  [PASS] client 0 batch 5: train/test disjoint
+  [PASS] client 0 batch 5: pool only contains batch-5 samples
+  [PASS] client 0 batch 5: no sample double-assigned across clients
+  [PASS] client 1 batch 5: train/test disjoint
+  [PASS] client 1 batch 5: pool only contains batch-5 samples
+  [PASS] client 1 batch 5: no sample double-assigned across clients
+  [PASS] client 2 batch 5: train/test disjoint
+  [PASS] client 2 batch 5: pool only contains batch-5 samples
+  [PASS] client 2 batch 5: no sample double-assigned across clients
+  [PASS] client 3 batch 5: train/test disjoint
+  [PASS] client 3 batch 5: pool only contains batch-5 samples
+  [PASS] client 3 batch 5: no sample double-assigned across clients
+  [PASS] client 4 batch 5: train/test disjoint
+  [PASS] client 4 batch 5: pool only contains batch-5 samples
+  [PASS] client 4 batch 5: no sample double-assigned across clients
+  [PASS] client 5 batch 5: train/test disjoint
+  [PASS] client 5 batch 5: pool only contains batch-5 samples
+  [PASS] client 5 batch 5: no sample double-assigned across clients
+  [PASS] client 6 batch 5: train/test disjoint
+  [PASS] client 6 batch 5: pool only contains batch-5 samples
+  [PASS] client 6 batch 5: no sample double-assigned across clients
+  [PASS] client 7 batch 5: train/test disjoint
+  [PASS] client 7 batch 5: pool only contains batch-5 samples
+  [PASS] client 7 batch 5: no sample double-assigned across clients
+  [PASS] client 8 batch 5: train/test disjoint
+  [PASS] client 8 batch 5: pool only contains batch-5 samples
+  [PASS] client 8 batch 5: no sample double-assigned across clients
+  [PASS] client 9 batch 5: train/test disjoint
+  [PASS] client 9 batch 5: pool only contains batch-5 samples
+  [PASS] client 9 batch 5: no sample double-assigned across clients
+  [PASS] batch 5: every available sample assigned exactly once
+  [PASS] client 0 batch 6: train/test disjoint
+  [PASS] client 0 batch 6: pool only contains batch-6 samples
+  [PASS] client 0 batch 6: no sample double-assigned across clients
+  [PASS] client 1 batch 6: train/test disjoint
+  [PASS] client 1 batch 6: pool only contains batch-6 samples
+  [PASS] client 1 batch 6: no sample double-assigned across clients
+  [PASS] client 2 batch 6: train/test disjoint
+  [PASS] client 2 batch 6: pool only contains batch-6 samples
+  [PASS] client 2 batch 6: no sample double-assigned across clients
+  [PASS] client 3 batch 6: train/test disjoint
+  [PASS] client 3 batch 6: pool only contains batch-6 samples
+  [PASS] client 3 batch 6: no sample double-assigned across clients
+  [PASS] client 4 batch 6: train/test disjoint
+  [PASS] client 4 batch 6: pool only contains batch-6 samples
+  [PASS] client 4 batch 6: no sample double-assigned across clients
+  [PASS] client 5 batch 6: train/test disjoint
+  [PASS] client 5 batch 6: pool only contains batch-6 samples
+  [PASS] client 5 batch 6: no sample double-assigned across clients
+  [PASS] client 6 batch 6: train/test disjoint
+  [PASS] client 6 batch 6: pool only contains batch-6 samples
+  [PASS] client 6 batch 6: no sample double-assigned across clients
+  [PASS] client 7 batch 6: train/test disjoint
+  [PASS] client 7 batch 6: pool only contains batch-6 samples
+  [PASS] client 7 batch 6: no sample double-assigned across clients
+  [PASS] client 8 batch 6: train/test disjoint
+  [PASS] client 8 batch 6: pool only contains batch-6 samples
+  [PASS] client 8 batch 6: no sample double-assigned across clients
+  [PASS] client 9 batch 6: train/test disjoint
+  [PASS] client 9 batch 6: pool only contains batch-6 samples
+  [PASS] client 9 batch 6: no sample double-assigned across clients
+  [PASS] batch 6: every available sample assigned exactly once
+  [PASS] client 0 batch 7: train/test disjoint
+  [PASS] client 0 batch 7: pool only contains batch-7 samples
+  [PASS] client 0 batch 7: no sample double-assigned across clients
+  [PASS] client 1 batch 7: train/test disjoint
+  [PASS] client 1 batch 7: pool only contains batch-7 samples
+  [PASS] client 1 batch 7: no sample double-assigned across clients
+  [PASS] client 2 batch 7: train/test disjoint
+  [PASS] client 2 batch 7: pool only contains batch-7 samples
+  [PASS] client 2 batch 7: no sample double-assigned across clients
+  [PASS] client 3 batch 7: train/test disjoint
+  [PASS] client 3 batch 7: pool only contains batch-7 samples
+  [PASS] client 3 batch 7: no sample double-assigned across clients
+  [PASS] client 4 batch 7: train/test disjoint
+  [PASS] client 4 batch 7: pool only contains batch-7 samples
+  [PASS] client 4 batch 7: no sample double-assigned across clients
+  [PASS] client 5 batch 7: train/test disjoint
+  [PASS] client 5 batch 7: pool only contains batch-7 samples
+  [PASS] client 5 batch 7: no sample double-assigned across clients
+  [PASS] client 6 batch 7: train/test disjoint
+  [PASS] client 6 batch 7: pool only contains batch-7 samples
+  [PASS] client 6 batch 7: no sample double-assigned across clients
+  [PASS] client 7 batch 7: train/test disjoint
+  [PASS] client 7 batch 7: pool only contains batch-7 samples
+  [PASS] client 7 batch 7: no sample double-assigned across clients
+  [PASS] client 8 batch 7: train/test disjoint
+  [PASS] client 8 batch 7: pool only contains batch-7 samples
+  [PASS] client 8 batch 7: no sample double-assigned across clients
+  [PASS] client 9 batch 7: train/test disjoint
+  [PASS] client 9 batch 7: pool only contains batch-7 samples
+  [PASS] client 9 batch 7: no sample double-assigned across clients
+  [PASS] batch 7: every available sample assigned exactly once
+  [PASS] client 0 batch 8: train/test disjoint
+  [PASS] client 0 batch 8: pool only contains batch-8 samples
+  [PASS] client 0 batch 8: no sample double-assigned across clients
+  [PASS] client 1 batch 8: train/test disjoint
+  [PASS] client 1 batch 8: pool only contains batch-8 samples
+  [PASS] client 1 batch 8: no sample double-assigned across clients
+  [PASS] client 2 batch 8: train/test disjoint
+  [PASS] client 2 batch 8: pool only contains batch-8 samples
+  [PASS] client 2 batch 8: no sample double-assigned across clients
+  [PASS] client 3 batch 8: train/test disjoint
+  [PASS] client 3 batch 8: pool only contains batch-8 samples
+  [PASS] client 3 batch 8: no sample double-assigned across clients
+  [PASS] client 4 batch 8: train/test disjoint
+  [PASS] client 4 batch 8: pool only contains batch-8 samples
+  [PASS] client 4 batch 8: no sample double-assigned across clients
+  [PASS] client 5 batch 8: train/test disjoint
+  [PASS] client 5 batch 8: pool only contains batch-8 samples
+  [PASS] client 5 batch 8: no sample double-assigned across clients
+  [PASS] client 6 batch 8: train/test disjoint
+  [PASS] client 6 batch 8: pool only contains batch-8 samples
+  [PASS] client 6 batch 8: no sample double-assigned across clients
+  [PASS] client 7 batch 8: train/test disjoint
+  [PASS] client 7 batch 8: pool only contains batch-8 samples
+  [PASS] client 7 batch 8: no sample double-assigned across clients
+  [PASS] client 8 batch 8: train/test disjoint
+  [PASS] client 8 batch 8: pool only contains batch-8 samples
+  [PASS] client 8 batch 8: no sample double-assigned across clients
+  [PASS] client 9 batch 8: train/test disjoint
+  [PASS] client 9 batch 8: pool only contains batch-8 samples
+  [PASS] client 9 batch 8: no sample double-assigned across clients
+  [PASS] batch 8: every available sample assigned exactly once
+  [PASS] client 0 batch 9: train/test disjoint
+  [PASS] client 0 batch 9: pool only contains batch-9 samples
+  [PASS] client 0 batch 9: no sample double-assigned across clients
+  [PASS] client 1 batch 9: train/test disjoint
+  [PASS] client 1 batch 9: pool only contains batch-9 samples
+  [PASS] client 1 batch 9: no sample double-assigned across clients
+  [PASS] client 2 batch 9: train/test disjoint
+  [PASS] client 2 batch 9: pool only contains batch-9 samples
+  [PASS] client 2 batch 9: no sample double-assigned across clients
+  [PASS] client 3 batch 9: train/test disjoint
+  [PASS] client 3 batch 9: pool only contains batch-9 samples
+  [PASS] client 3 batch 9: no sample double-assigned across clients
+  [PASS] client 4 batch 9: train/test disjoint
+  [PASS] client 4 batch 9: pool only contains batch-9 samples
+  [PASS] client 4 batch 9: no sample double-assigned across clients
+  [PASS] client 5 batch 9: train/test disjoint
+  [PASS] client 5 batch 9: pool only contains batch-9 samples
+  [PASS] client 5 batch 9: no sample double-assigned across clients
+  [PASS] client 6 batch 9: train/test disjoint
+  [PASS] client 6 batch 9: pool only contains batch-9 samples
+  [PASS] client 6 batch 9: no sample double-assigned across clients
+  [PASS] client 7 batch 9: train/test disjoint
+  [PASS] client 7 batch 9: pool only contains batch-9 samples
+  [PASS] client 7 batch 9: no sample double-assigned across clients
+  [PASS] client 8 batch 9: train/test disjoint
+  [PASS] client 8 batch 9: pool only contains batch-9 samples
+  [PASS] client 8 batch 9: no sample double-assigned across clients
+  [PASS] client 9 batch 9: train/test disjoint
+  [PASS] client 9 batch 9: pool only contains batch-9 samples
+  [PASS] client 9 batch 9: no sample double-assigned across clients
+  [PASS] batch 9: every available sample assigned exactly once
+  [PASS] client 0 batch 10: train/test disjoint
+  [PASS] client 0 batch 10: pool only contains batch-10 samples
+  [PASS] client 0 batch 10: no sample double-assigned across clients
+  [PASS] client 1 batch 10: train/test disjoint
+  [PASS] client 1 batch 10: pool only contains batch-10 samples
+  [PASS] client 1 batch 10: no sample double-assigned across clients
+  [PASS] client 2 batch 10: train/test disjoint
+  [PASS] client 2 batch 10: pool only contains batch-10 samples
+  [PASS] client 2 batch 10: no sample double-assigned across clients
+  [PASS] client 3 batch 10: train/test disjoint
+  [PASS] client 3 batch 10: pool only contains batch-10 samples
+  [PASS] client 3 batch 10: no sample double-assigned across clients
+  [PASS] client 4 batch 10: train/test disjoint
+  [PASS] client 4 batch 10: pool only contains batch-10 samples
+  [PASS] client 4 batch 10: no sample double-assigned across clients
+  [PASS] client 5 batch 10: train/test disjoint
+  [PASS] client 5 batch 10: pool only contains batch-10 samples
+  [PASS] client 5 batch 10: no sample double-assigned across clients
+  [PASS] client 6 batch 10: train/test disjoint
+  [PASS] client 6 batch 10: pool only contains batch-10 samples
+  [PASS] client 6 batch 10: no sample double-assigned across clients
+  [PASS] client 7 batch 10: train/test disjoint
+  [PASS] client 7 batch 10: pool only contains batch-10 samples
+  [PASS] client 7 batch 10: no sample double-assigned across clients
+  [PASS] client 8 batch 10: train/test disjoint
+  [PASS] client 8 batch 10: pool only contains batch-10 samples
+  [PASS] client 8 batch 10: no sample double-assigned across clients
+  [PASS] client 9 batch 10: train/test disjoint
+  [PASS] client 9 batch 10: pool only contains batch-10 samples
+  [PASS] client 9 batch 10: no sample double-assigned across clients
+  [PASS] batch 10: every available sample assigned exactly once
+
+============================================================
+RESULT: ALL CHECKS PASSED
+============================================================
